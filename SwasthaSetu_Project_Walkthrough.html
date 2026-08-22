@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwasthaSetu Project Walkthrough</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #24292e;
+    background-color: #fff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  h1 { font-size: 2em; border-bottom: 1px solid #eaecef; padding-bottom: .3em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #eaecef; padding-bottom: .3em; }
+  code {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+  }
+  pre code { background-color: transparent; padding: 0; }
+  blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: .25em solid #dfe2e5;
+    margin: 0;
+  }
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+  }
+  table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+  table tr:nth-child(2n) { background-color: #f6f8fa; }
+</style>
+</head>
+<body>
+<h1>Swasthya Setu AI</h1>
+<p><strong>Complete Regional Multilingual Support</strong></p>
+<p>Swasthya Setu AI is a comprehensive, AI-powered healthcare triage and financial navigation platform. It is designed to bridge the gap between rural/regional patients and critical healthcare infrastructure by combining state-of-the-art LLMs, real-time cost estimation, and local health worker (ASHA) integration.</p>
+<hr />
+<h2>1. Core Architecture</h2>
+<p>The platform is designed to be highly resilient, falling back gracefully when APIs fail or network connectivity drops.</p>
+<h3>Frontend (Vite + React + Tailwind)</h3>
+<ul>
+<li><strong>Glassmorphism UI:</strong> A premium, dark-mode aesthetic utilizing deep blur effects, glowing cyan borders, and smooth <code>framer-motion</code> spring physics.</li>
+<li><strong>SearchSelect:</strong> Custom-built autocomplete comboboxes for all critical inputs (Cities, Hospitals, Diseases, Providers) for lightning-fast local filtering.</li>
+<li><strong>Zero-Dependency Mapping:</strong> Uses <strong>Pigeon Maps</strong> backed by OpenStreetMap (street tiles) and ArcGIS (satellite tiles) to provide interactive facility maps completely free of Google Maps billing dependencies.</li>
+</ul>
+<h3>Backend (FastAPI + Python)</h3>
+<ul>
+<li><strong>Zero-Setup Database:</strong> Runs entirely on a local <code>SQLite</code> (<code>swasthyasetu.db</code>) file using <code>aiosqlite</code> for asynchronous performance. No heavy PostgreSQL or cloud database setup required for testing or local hosting.</li>
+<li><strong>Resilient AI Cascade:</strong> A sophisticated LLM routing system that attempts to use <strong>Gemini</strong>, but seamlessly falls back to <strong>Groq</strong> and <strong>NVIDIA</strong> if rate limits or failures occur.</li>
+<li><strong>Security &amp; Rate Limiting:</strong> Enforced via <code>slowapi</code> to protect against DDoS and API spam.</li>
+</ul>
+<hr />
+<h2>2. Key Modules &amp; Features</h2>
+<h3>🚑 AI Symptom Triage (Vision + LLM)</h3>
+<p>Located in the <strong>Triage Tab</strong>, this is the first line of defense for a patient.
+- <strong>Multimodal Input:</strong> Patients can input text symptoms and optionally upload an image (e.g., a rash, wound, or scan).
+- <strong>Deterministic Safety Gate:</strong> The AI analyzes the inputs and runs them against a deterministic safety checklist (Red Flags) to immediately identify if the situation requires a 24/7 ER.
+- <strong>Severity Mapping:</strong> Classifies the case into Mild, Moderate, Severe, or Critical, and outputs matched potential conditions.</p>
+<h3>💰 Advanced Cost Estimation &amp; Finance</h3>
+<p>Located in the <strong>Cost Estimate Tab</strong>, this module helps patients understand exactly how much a treatment will hurt them financially.
+- <strong>OSINT Cost Scraper (<code>precision_service.py</code>):</strong> Instead of hallucinating costs, the backend performs a lightweight OSINT web scrape against trusted medical authorities (NIH, Mayo Clinic) to fetch real-world data and inject it into the AI's cost models. 
+- <strong>Financial Profiler:</strong> Patients input their monthly income, housing costs, EMIs, and food expenses. The engine calculates their true disposable income and cross-references it with the estimated hospital bills to warn them of potential financial ruin.</p>
+<h3>🛡️ Insurance Policy Checker</h3>
+<p>Located in the <strong>Insurance Tab</strong>, this tool prevents patients from being caught off guard by hidden hospital fees.
+- <strong>Dynamic Matching:</strong> Users select their insurance provider and plan. The system dynamically updates available plans based on the selected provider.
+- <strong>Gap Analysis:</strong> It calculates the expected treatment cost and subtracts the coverage limit, explicitly showing the patient their net out-of-pocket gap.</p>
+<h3>🏥 Facility Finder &amp; 3D Maps</h3>
+<p>Located in the <strong>Facilities Tab</strong>, this module routes the patient to the right hospital.
+- <strong>Real-time Map:</strong> Plots verified hospitals on a satellite or street map.
+- <strong>Smart Filtering:</strong> Users can filter hospitals by ICU availability, PM-JAY Cashless support, 24/7 ER, and Blood Banks.
+- <strong>Cost Hyperlinking:</strong> Facilities feature a glowing <code>net_expected_treatment_cost</code> button that instantly bridges the user over to the Cost tab, autonomously pre-filling the target hospital and city.</p>
+<h3>🧑‍⚕️ ASHA Control Room</h3>
+<p>The <strong>Community Desk</strong> (ASHA Help Corner) bridges the AI with actual human healthcare workers on the ground.
+- <strong>Patient Registration:</strong> ASHA workers can log in via a secure PIN to access their control room.
+- <strong>Emergency Board:</strong> If a patient's Triage results trigger a Level-4 Critical alert, the case is immediately pushed to the local ASHA worker's emergency board.
+- <strong>Dispatch:</strong> The ASHA worker can accept the case, triggering an "En route" status to coordinate physical intervention.</p>
+<hr />
+<h2>3. Testing &amp; Resilience Strategy</h2>
+<p>The system is fortified by an adversarial testing philosophy:
+- <strong>Fallback Supremacy:</strong> If the Python backend is completely offline, the React frontend catches the <code>fetch</code> failure and immediately falls back to a lightning-fast local mock engine to ensure the UI (like facility searching) never breaks.
+- <strong>API Torture Limits:</strong> The LLM cascade is designed to withstand API timeouts by failing over to secondary providers in milliseconds.
+- <strong>Strict Pydantic Validation:</strong> All JSON output from the AI models is aggressively sanitized and validated by Pydantic schemas to ensure malformed AI hallucinations can never crash the UI.</p>
+</body>
+</html>

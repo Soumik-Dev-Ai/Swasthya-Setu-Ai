@@ -1,0 +1,276 @@
+{
+  "examples": [
+    {
+      "id": "b001",
+      "text": "seene mein bahut dard hai aur saans lene mein mushkil ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b002",
+      "text": "chest mein pain ke saath saans bhi nahi aa rahi",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b003",
+      "text": "seene ka dard bahut zyada hai aur breathing difficult ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b004",
+      "text": "meri chest hurt kar rahi hai aur saans phool rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b005",
+      "text": "seene mein jalan ke saath left haath mein dard ho raha hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest burning radiating to left arm"
+    },
+    {
+      "id": "b006",
+      "text": "saans bahut mushkil se aa rahi hai aur hoth neele pad gaye hain",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: severe breathlessness with cyanosis"
+    },
+    {
+      "id": "b007",
+      "text": "chot se khoon bahut nikal raha hai aur bleeding ruk nahi rahi",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: uncontrolled bleeding"
+    },
+    {
+      "id": "b008",
+      "text": "bahut chakkar aa rahe hain aur ek haath sunn pad gaya hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: dizziness with unilateral numbness"
+    },
+    {
+      "id": "b009",
+      "text": "aankh mein injury ke baad achanak dikhai kam de raha hai",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: sudden vision loss after eye injury"
+    },
+    {
+      "id": "b010",
+      "text": "pet mein achanak bahut tez dard hua aur hilna mushkil hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: sudden severe abdominal pain"
+    },
+
+    {
+      "id": "b011",
+      "text": "do hafte se khaansi hai aur bukhar bhi bana hua hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent cough + fever pattern"
+    },
+    {
+      "id": "b012",
+      "text": "khaansi kaafi dino se hai aur fever bhi hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent cough + fever pattern"
+    },
+    {
+      "id": "b013",
+      "text": "peshab karte waqt jalan chaar din se ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent urinary-burning pattern"
+    },
+    {
+      "id": "b014",
+      "text": "teen din se pet dard hai aur vomiting bhi ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent abdominal pain + vomiting pattern"
+    },
+    {
+      "id": "b015",
+      "text": "ghutne mein dard hai aur seedhi chadhne ke baad se theek nahi hua",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent joint-pain pattern"
+    },
+    {
+      "id": "b016",
+      "text": "aankh laal hai aur paanch din se khujli ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent eye-irritation pattern"
+    },
+    {
+      "id": "b017",
+      "text": "raat ko neend nahi aati aur is wajah se bahut pareshaan hoon",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter ongoing sleep-disturbance pattern"
+    },
+    {
+      "id": "b018",
+      "text": "mera BP baar baar high aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter recurrent high-BP pattern"
+    },
+    {
+      "id": "b019",
+      "text": "diabetes ki medicine khatam ho gayi hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter chronic-medication-lapse pattern"
+    },
+    {
+      "id": "b020",
+      "text": "bukhar chhe din se hai aur medicine se bhi nahi ja raha",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter prolonged-fever pattern"
+    },
+
+    {
+      "id": "b021",
+      "text": "halka sar dard hai kyunki kal raat neend poori nahi hui",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild headache with lack of sleep"
+    },
+    {
+      "id": "b022",
+      "text": "ungli mein chhota cut laga hai aur bleeding ruk gayi hai",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter minor controlled cut pattern"
+    },
+    {
+      "id": "b023",
+      "text": "thoda zukaam hai aur baar baar chheenk aa rahi hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild cold pattern"
+    },
+    {
+      "id": "b024",
+      "text": "dhoop mein rehne ke baad halka sa chakkar aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild heat-related dizziness pattern"
+    },
+    {
+      "id": "b025",
+      "text": "khana zyada kha liya tha isliye halka pet dard hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild discomfort after overeating"
+    },
+    {
+      "id": "b026",
+      "text": "haath par chhota sa daana hai aur thodi khujli ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "dermatological",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter minor localized skin irritation"
+    },
+    {
+      "id": "b027",
+      "text": "ek din se halka fever hai aur koi aur problem nahi hai",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild brief fever pattern"
+    },
+    {
+      "id": "b028",
+      "text": "kaam karte waqt kamar mein halka dard hota hai",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild work-related back-pain pattern"
+    },
+    {
+      "id": "b029",
+      "text": "gale mein halki kharash hai aur nigalne par thoda dard hota hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild sore-throat pattern"
+    },
+    {
+      "id": "b030",
+      "text": "gale mein halka sa dard hai aur thodi irritation ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild sore-throat pattern"
+    }
+  ]
+}

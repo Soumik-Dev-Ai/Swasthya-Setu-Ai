@@ -1,0 +1,1143 @@
+{
+  "dataset_name": "SwasthyaSetu AI Track A v2",
+  "description": "Combined Track A bootstrap dataset using the supplied starter dataset and team-authored variations.",
+  "taxonomy": {
+    "symptom_categories": [
+      "cardiovascular",
+      "chronic_ncd",
+      "dermatological",
+      "fever_infectious",
+      "gastrointestinal",
+      "injury_trauma",
+      "maternal_health",
+      "mental_health",
+      "musculoskeletal",
+      "ophthalmic",
+      "other",
+      "pediatric",
+      "respiratory"
+    ],
+    "urgency_tiers": [
+      "CONSULT_SOON",
+      "EMERGENCY",
+      "SELF_CARE_ADVISORY"
+    ]
+  },
+  "examples": [
+    {
+      "id": "a001",
+      "text": "chest mein bahut dard ho raha hai aur saans nahi aa rahi",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Chest pain + breathlessness together = red-flag combination per team heuristic sheet"
+    },
+    {
+      "id": "a002",
+      "text": "bahut chakkar aa rahe hain aur ek taraf ka haath sunn ho gaya hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Unilateral numbness + dizziness = possible stroke signs per team heuristic sheet"
+    },
+    {
+      "id": "a003",
+      "text": "pregnant hoon, pet mein bahut tez dard aur khoon aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Pregnancy + bleeding + severe pain = obstetric emergency per team heuristic sheet"
+    },
+    {
+      "id": "a004",
+      "text": "bacha behosh ho gaya aur usko dora pad raha hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Child seizure/unconsciousness = red-flag per team heuristic sheet"
+    },
+    {
+      "id": "a005",
+      "text": "bahut zyada khoon beh raha hai chot se, band nahi ho raha",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Uncontrolled bleeding = red-flag per team heuristic sheet"
+    },
+    {
+      "id": "a006",
+      "text": "saans lene mein bahut takleef ho rahi hai, hoth neele pad rahe hain",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Severe breathlessness with cyanosis = red-flag per team heuristic sheet"
+    },
+    {
+      "id": "a007",
+      "text": "mera bacha 3 din se tez bukhar mein hai, khana nahi kha raha",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Persistent fever >48hrs in child without red-flag signs -> needs professional review, not emergency"
+    },
+    {
+      "id": "a008",
+      "text": "khaansi hai 2 hafte se, bukhar bhi hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Persistent cough + fever beyond 2 weeks warrants clinical review"
+    },
+    {
+      "id": "a009",
+      "text": "sugar patient hoon, dawai khatam ho gayi hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Chronic medication lapse needs prompt refill/consult, not emergency"
+    },
+    {
+      "id": "a010",
+      "text": "peshab karte waqt jalan hoti hai 4 din se",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Suspected UTI, persistent symptom needing clinical review"
+    },
+    {
+      "id": "a011",
+      "text": "pet mein dard hai 3 din se, ulti bhi ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Persistent abdominal pain with vomiting, no severe/emergency signs stated"
+    },
+    {
+      "id": "a012",
+      "text": "ghutno mein dard hai jab se seedhi chadhi thi",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Persistent joint pain post-activity, non-urgent clinical review"
+    },
+    {
+      "id": "a013",
+      "text": "aankhon mein laalpan aur kharish hai 5 din se",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Persistent eye irritation warrants professional check to rule out infection"
+    },
+    {
+      "id": "a014",
+      "text": "neend nahi aati raat ko, bahut pareshaan rehta hoon",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Ongoing sleep disturbance with distress warrants professional consult"
+    },
+    {
+      "id": "a015",
+      "text": "blood pressure high aa raha hai baar baar",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Recurrent high BP readings need clinical follow-up"
+    },
+    {
+      "id": "a016",
+      "text": "halka sa sar dard hai, neend nahi aayi thi",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Mild headache with clear benign cause (lack of sleep), no red-flag features"
+    },
+    {
+      "id": "a017",
+      "text": "ungli kat gayi thi, khoon zyada nahi aa raha",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Minor cut, bleeding controlled, self-limiting"
+    },
+    {
+      "id": "a018",
+      "text": "thoda sa zukaam hai, chhinkein aa rahi hain",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Mild cold symptoms, self-limiting"
+    },
+    {
+      "id": "a019",
+      "text": "dhoop mein rehne se thoda sa sar chakra raha hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Mild heat-related dizziness with clear benign cause"
+    },
+    {
+      "id": "a020",
+      "text": "halka pet dard hai, khana zyada kha liya tha",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Mild discomfort with clear benign cause (overeating), self-limiting"
+    },
+    {
+      "id": "a021",
+      "text": "chota sa daana nikla hai haath par, khujli ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "dermatological",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Minor localized skin irritation, self-limiting"
+    },
+    {
+      "id": "a022",
+      "text": "seene mein jalan ho rahi hai aur bayan haath mein bhi dard hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Chest burning radiating to left arm = classic cardiac red-flag pattern"
+    },
+    {
+      "id": "a023",
+      "text": "bahut tez bukhar hai baby ko, seizures aa rahe hain",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Febrile seizure in infant/child = red-flag per team heuristic sheet"
+    },
+    {
+      "id": "a024",
+      "text": "accident ho gaya, haath tuta hua lag raha hai, bahut dard hai",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Suspected fracture without uncontrolled bleeding or shock signs -> urgent but not immediate-life-threat by text alone; escalate if additional red-flags present"
+    },
+    {
+      "id": "a025",
+      "text": "pet mein bahut tez dard hai, ekdum se shuru hua, hil nahi pa raha",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Sudden-onset severe abdominal pain preventing movement = red-flag for acute abdomen"
+    },
+    {
+      "id": "a026",
+      "text": "bukhar hai halka sa, 1 din se, aur kuch nahi",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Mild, brief fever with no other symptoms, self-limiting"
+    },
+    {
+      "id": "a027",
+      "text": "bukhar hai 6 din se, utarta nahi dawai se bhi",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Prolonged fever unresponsive to medication needs clinical evaluation"
+    },
+    {
+      "id": "a028",
+      "text": "kaafi udaas rehta hoon, kaam mein man nahi lagta, akela mehsoos karta hoon",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Persistent low mood and social withdrawal warrants professional consult"
+    },
+    {
+      "id": "a029",
+      "text": "mujhe khud ko nuksan pahunchane ka khayal aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Self-harm ideation = red-flag, immediate professional/crisis support needed"
+    },
+    {
+      "id": "a030",
+      "text": "kamar mein dard hai kaam karte waqt",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Mild work-related back pain, self-limiting"
+    },
+    {
+      "id": "a031",
+      "text": "aankh mein kuch gir gaya tha, ab dikhna kam ho gaya hai",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored",
+      "label_basis": "Sudden vision loss after foreign body injury = red-flag ophthalmic emergency"
+    },
+    {
+      "id": "a032",
+      "text": "gale mein kharash hai, halka dard hai nigalte waqt",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored",
+      "label_basis": "Mild sore throat with no red-flag features"
+    },
+    {
+      "id": "a033",
+      "text": "diabetes hai, pair mein ghaav hai jo theek nahi ho raha 2 hafte se",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Non-healing wound in diabetic patient needs urgent professional review to prevent complications"
+    },
+    {
+      "id": "a034",
+      "text": "bacha bahut zyada ro raha hai aur pet phool gaya hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Infant distress with abdominal distension needs professional review; escalate to EMERGENCY if additional red-flag signs (fever, lethargy, vomiting) present"
+    },
+    {
+      "id": "a035",
+      "text": "mujhe kuch samajh nahi aa raha, thoda ajeeb sa lag raha hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored",
+      "label_basis": "Vague/ambiguous symptom description with no clear benign explanation -> default to conservative tier per Section 4, Rule 6 of the main document"
+    },
+    {
+      "id": "b001",
+      "text": "seene mein bahut dard hai aur saans lene mein mushkil ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b002",
+      "text": "chest mein pain ke saath saans bhi nahi aa rahi",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b003",
+      "text": "seene ka dard bahut zyada hai aur breathing difficult ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b004",
+      "text": "meri chest hurt kar rahi hai aur saans phool rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest pain + breathlessness"
+    },
+    {
+      "id": "b005",
+      "text": "seene mein jalan ke saath left haath mein dard ho raha hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: chest burning radiating to left arm"
+    },
+    {
+      "id": "b006",
+      "text": "saans bahut mushkil se aa rahi hai aur hoth neele pad gaye hain",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: severe breathlessness with cyanosis"
+    },
+    {
+      "id": "b007",
+      "text": "chot se khoon bahut nikal raha hai aur bleeding ruk nahi rahi",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: uncontrolled bleeding"
+    },
+    {
+      "id": "b008",
+      "text": "bahut chakkar aa rahe hain aur ek haath sunn pad gaya hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: dizziness with unilateral numbness"
+    },
+    {
+      "id": "b009",
+      "text": "aankh mein injury ke baad achanak dikhai kam de raha hai",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: sudden vision loss after eye injury"
+    },
+    {
+      "id": "b010",
+      "text": "pet mein achanak bahut tez dard hua aur hilna mushkil hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter red-flag pattern: sudden severe abdominal pain"
+    },
+    {
+      "id": "b011",
+      "text": "do hafte se khaansi hai aur bukhar bhi bana hua hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent cough + fever pattern"
+    },
+    {
+      "id": "b012",
+      "text": "khaansi kaafi dino se hai aur fever bhi hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent cough + fever pattern"
+    },
+    {
+      "id": "b013",
+      "text": "peshab karte waqt jalan chaar din se ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent urinary-burning pattern"
+    },
+    {
+      "id": "b014",
+      "text": "teen din se pet dard hai aur vomiting bhi ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent abdominal pain + vomiting pattern"
+    },
+    {
+      "id": "b015",
+      "text": "ghutne mein dard hai aur seedhi chadhne ke baad se theek nahi hua",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent joint-pain pattern"
+    },
+    {
+      "id": "b016",
+      "text": "aankh laal hai aur paanch din se khujli ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent eye-irritation pattern"
+    },
+    {
+      "id": "b017",
+      "text": "raat ko neend nahi aati aur is wajah se bahut pareshaan hoon",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter ongoing sleep-disturbance pattern"
+    },
+    {
+      "id": "b018",
+      "text": "mera BP baar baar high aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter recurrent high-BP pattern"
+    },
+    {
+      "id": "b019",
+      "text": "diabetes ki medicine khatam ho gayi hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter chronic-medication-lapse pattern"
+    },
+    {
+      "id": "b020",
+      "text": "bukhar chhe din se hai aur medicine se bhi nahi ja raha",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter prolonged-fever pattern"
+    },
+    {
+      "id": "b021",
+      "text": "halka sar dard hai kyunki kal raat neend poori nahi hui",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild headache with lack of sleep"
+    },
+    {
+      "id": "b022",
+      "text": "ungli mein chhota cut laga hai aur bleeding ruk gayi hai",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter minor controlled cut pattern"
+    },
+    {
+      "id": "b023",
+      "text": "thoda zukaam hai aur baar baar chheenk aa rahi hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild cold pattern"
+    },
+    {
+      "id": "b024",
+      "text": "dhoop mein rehne ke baad halka sa chakkar aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild heat-related dizziness pattern"
+    },
+    {
+      "id": "b025",
+      "text": "khana zyada kha liya tha isliye halka pet dard hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild discomfort after overeating"
+    },
+    {
+      "id": "b026",
+      "text": "haath par chhota sa daana hai aur thodi khujli ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "dermatological",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter minor localized skin irritation"
+    },
+    {
+      "id": "b027",
+      "text": "ek din se halka fever hai aur koi aur problem nahi hai",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild brief fever pattern"
+    },
+    {
+      "id": "b028",
+      "text": "kaam karte waqt kamar mein halka dard hota hai",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild work-related back-pain pattern"
+    },
+    {
+      "id": "b029",
+      "text": "gale mein halki kharash hai aur nigalne par thoda dard hota hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild sore-throat pattern"
+    },
+    {
+      "id": "b030",
+      "text": "gale mein halka sa dard hai aur thodi irritation ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "respiratory",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild sore-throat pattern"
+    },
+    {
+      "id": "v001",
+      "text": "pregnant hoon aur pet mein bahut tez dard ke saath bleeding ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Team heuristic based on starter pattern: severe abdominal pain with bleeding during pregnancy"
+    },
+    {
+      "id": "v002",
+      "text": "pregnancy mein achanak bahut zyada khoon aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Team heuristic based on starter pattern: heavy bleeding during pregnancy"
+    },
+    {
+      "id": "v003",
+      "text": "delivery ke baad bleeding bahut zyada ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Team heuristic based on starter postpartum heavy-bleeding pattern"
+    },
+    {
+      "id": "v004",
+      "text": "pregnant hoon, pet mein halka discomfort hai lekin bleeding nahi hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Team-authored conservative maternal-health example; insufficient information for self-care classification"
+    },
+    {
+      "id": "v005",
+      "text": "pregnancy mein kuch dino se unusual pain ho raha hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Team-authored conservative maternal-health example for persistent pain"
+    },
+    {
+      "id": "v006",
+      "text": "mere bache ko bahut tez bukhar hai aur jhatke aa rahe hain",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter pediatric high-fever with convulsions pattern"
+    },
+    {
+      "id": "v007",
+      "text": "bacha bukhar mein kaanp raha hai aur response kam de raha hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Team-authored pediatric emergency variation based on severe fever/red-flag presentation"
+    },
+    {
+      "id": "v008",
+      "text": "mera bacha teen din se fever mein hai aur khana bhi nahi kha raha",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter persistent pediatric fever and reduced intake pattern"
+    },
+    {
+      "id": "v009",
+      "text": "bache ko do din se bukhar hai lekin koi aur serious symptom nahi hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Team-authored conservative pediatric fever example"
+    },
+    {
+      "id": "v010",
+      "text": "bache ko halka cold hai aur thodi chheenk aa rahi hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Team-authored mild pediatric cold variation"
+    },
+    {
+      "id": "v011",
+      "text": "achanak seene mein pressure hai aur paseena aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter chest-tightness with sweating emergency pattern"
+    },
+    {
+      "id": "v012",
+      "text": "chest mein tightness ke saath saans lene mein problem ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Team heuristic based on starter chest pain/breathlessness red-flag pattern"
+    },
+    {
+      "id": "v013",
+      "text": "seene mein dard ho raha hai aur saath mein saans phool rahi hai",
+      "language": "hinglish",
+      "symptom_category": "cardiovascular",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter chest pain plus breathlessness emergency pattern"
+    },
+    {
+      "id": "v014",
+      "text": "BP high rehta hai aur follow-up ke liye doctor se milna hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of chronic hypertension follow-up pattern"
+    },
+    {
+      "id": "v015",
+      "text": "sugar ki medicine khatam ho gayi hai aur follow-up chahiye",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter chronic-medication-lapse pattern"
+    },
+    {
+      "id": "v016",
+      "text": "diabetes hai aur routine checkup ke liye jaana hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Team-authored chronic NCD follow-up example"
+    },
+    {
+      "id": "v017",
+      "text": "BP high hai lekin medicine regularly le raha hoon aur abhi koi aur symptom nahi hai",
+      "language": "hinglish",
+      "symptom_category": "chronic_ncd",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "Variation of starter stable high-BP follow-up pattern",
+      "label_basis": "Variation of starter stable high-BP follow-up pattern"
+    },
+    {
+      "id": "v018",
+      "text": "bahut ghabrahat ho rahi hai aur kai din se neend nahi aa rahi",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter anxiety/restlessness with sleep disturbance pattern"
+    },
+    {
+      "id": "v019",
+      "text": "mann bahut restless rehta hai aur sleep disturb hai",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter ongoing anxiety and sleep disturbance pattern"
+    },
+    {
+      "id": "v020",
+      "text": "kuch dino se bahut anxiety feel ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Team-authored persistent mental-health symptom example"
+    },
+    {
+      "id": "v021",
+      "text": "aankh se achanak dikhna band ho gaya",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter sudden vision-loss emergency pattern"
+    },
+    {
+      "id": "v022",
+      "text": "ek aankh se suddenly vision kam ho gaya",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter sudden vision-loss emergency pattern"
+    },
+    {
+      "id": "v023",
+      "text": "peeth mein dard hai bhaari cheez uthane ke baad",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild back-pain after lifting pattern"
+    },
+    {
+      "id": "v024",
+      "text": "ghutne ka dard roz seedhi chadhne par badh jata hai",
+      "language": "hinglish",
+      "symptom_category": "musculoskeletal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter ongoing knee-pain pattern"
+    },
+    {
+      "id": "v025",
+      "text": "girne ke baad sar se khoon bahut nikal raha hai",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter head injury with bleeding pattern"
+    },
+    {
+      "id": "v026",
+      "text": "ungli par chhota cut hai aur bleeding ruk gayi hai",
+      "language": "hinglish",
+      "symptom_category": "injury_trauma",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter minor controlled cut pattern"
+    },
+    {
+      "id": "v027",
+      "text": "bukhar paanch din se hai aur abhi tak theek nahi hua",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter prolonged-fever pattern"
+    },
+    {
+      "id": "v028",
+      "text": "halka fever hai aur thodi weakness bhi hai",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild fever with fatigue pattern"
+    },
+    {
+      "id": "v029",
+      "text": "pet mein halka dard hai khana khane ke baad theek ho jata hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter mild post-meal abdominal discomfort pattern"
+    },
+    {
+      "id": "v030",
+      "text": "bahut tez vomiting ke saath pet mein unbearable pain hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Variation of starter severe vomiting plus severe abdominal pain pattern"
+    },
+    {
+      "id": "cat001",
+      "text": "pet mein dard ke saath baar baar vomiting ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "GI-specific abdominal pain with repeated vomiting"
+    },
+    {
+      "id": "cat002",
+      "text": "pet kharab hai aur aaj se loose motion ho rahe hain",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "GI-specific diarrhea presentation"
+    },
+    {
+      "id": "cat003",
+      "text": "khana khane ke baad nausea aur pet mein discomfort hota hai",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "GI-specific nausea and post-meal abdominal discomfort"
+    },
+    {
+      "id": "cat004",
+      "text": "pet mein severe pain ke saath vomiting aur loose motion dono hain",
+      "language": "hinglish",
+      "symptom_category": "gastrointestinal",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "GI-specific severe abdominal pain with vomiting and diarrhea"
+    },
+    {
+      "id": "cat005",
+      "text": "main pregnant hoon aur pregnancy ke dauran bleeding ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pregnancy context with bleeding"
+    },
+    {
+      "id": "cat006",
+      "text": "pregnancy mein baby movement noticeably kam ho gayi hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pregnancy context with reduced fetal movement"
+    },
+    {
+      "id": "cat007",
+      "text": "delivery ke baad unusual bleeding ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "maternal_health",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit postpartum context with abnormal bleeding"
+    },
+    {
+      "id": "cat008",
+      "text": "mera bacha bukhar mein hai aur bahut weak lag raha hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit child context with fever and weakness"
+    },
+    {
+      "id": "cat009",
+      "text": "mere baby ko vomiting ho rahi hai aur woh doodh nahi pee raha",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit infant context with vomiting and reduced feeding"
+    },
+    {
+      "id": "cat010",
+      "text": "bacha achanak behosh ho gaya aur jhatke aa rahe hain",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit child context with loss of consciousness and seizure"
+    },
+    {
+      "id": "cat011",
+      "text": "meri beti ko do din se fever hai aur woh normally active nahi hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit child context with persistent fever and reduced activity"
+    },
+    {
+      "id": "cat012",
+      "text": "aankh mein redness hai aur aankh se paani aa raha hai",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit eye symptoms"
+    },
+    {
+      "id": "cat013",
+      "text": "aankh mein khujli aur jalan ho rahi hai",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit eye itching and irritation"
+    },
+    {
+      "id": "cat014",
+      "text": "ek aankh se achanak clearly dikhai nahi de raha",
+      "language": "hinglish",
+      "symptom_category": "ophthalmic",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit sudden vision disturbance"
+    },
+    {
+      "id": "cat015",
+      "text": "thoda headache hai lekin koi aur symptom nahi hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Nonspecific mild symptom without category-specific red flags"
+    },
+    {
+      "id": "cat016",
+      "text": "aaj thoda tired feel kar raha hoon",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Nonspecific fatigue presentation"
+    },
+    {
+      "id": "cat017",
+      "text": "adult hoon aur chaar din se fever hai",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Adult persistent fever without pediatric context"
+    },
+    {
+      "id": "cat018",
+      "text": "mujhe teen din se bukhar hai aur body pain bhi hai",
+      "language": "hinglish",
+      "symptom_category": "fever_infectious",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "General infectious-fever presentation without child context"
+    },
+    {
+      "id": "cat019",
+      "text": "bahut anxiety ho rahi hai aur mann restless hai",
+      "language": "hinglish",
+      "symptom_category": "mental_health",
+      "urgency_tier": "CONSULT_SOON",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit anxiety and restlessness"
+    },
+    {
+      "id": "cat020",
+      "text": "bas ajeeb sa feel ho raha hai lekin koi specific symptom nahi hai",
+      "language": "hinglish",
+      "symptom_category": "other",
+      "urgency_tier": "SELF_CARE_ADVISORY",
+      "source": "team_authored_variation",
+      "label_basis": "Vague nonspecific complaint without explicit mental-health symptoms"
+    },
+    {
+      "id": "safe001",
+      "text": "bache ko bahut tez bukhar hai aur woh properly respond nahi kar raha",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pediatric emergency with severe fever and reduced responsiveness"
+    },
+    {
+      "id": "safe002",
+      "text": "mera baby fever mein behosh jaisa ho raha hai aur response bahut kam hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pediatric emergency with fever and markedly reduced responsiveness"
+    },
+    {
+      "id": "safe003",
+      "text": "bache ko bukhar ke saath jhatke aa rahe hain aur woh normal response nahi de raha",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pediatric emergency with fever, seizure-like activity and reduced responsiveness"
+    },
+    {
+      "id": "safe004",
+      "text": "mera bacha fever mein hai aur baar baar behosh ho raha hai",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pediatric emergency with fever and recurrent loss of consciousness"
+    },
+    {
+      "id": "safe005",
+      "text": "high fever ke saath bacha bahut sleepy hai aur bulane par response nahi karta",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pediatric emergency with high fever and impaired responsiveness"
+    },
+    {
+      "id": "safe006",
+      "text": "bacha kaanp raha hai, fever bahut high hai aur woh normally baat nahi kar pa raha",
+      "language": "hinglish",
+      "symptom_category": "pediatric",
+      "urgency_tier": "EMERGENCY",
+      "source": "team_authored_variation",
+      "label_basis": "Explicit pediatric emergency with high fever, shaking and altered responsiveness"
+    }
+  ],
+  "statistics": {
+    "total_examples": 65,
+    "category_counts": {
+      "cardiovascular": 7,
+      "other": 9,
+      "maternal_health": 1,
+      "pediatric": 4,
+      "injury_trauma": 5,
+      "respiratory": 10,
+      "chronic_ncd": 5,
+      "gastrointestinal": 6,
+      "musculoskeletal": 4,
+      "ophthalmic": 4,
+      "mental_health": 4,
+      "dermatological": 2,
+      "fever_infectious": 4
+    },
+    "urgency_counts": {
+      "EMERGENCY": 21,
+      "CONSULT_SOON": 25,
+      "SELF_CARE_ADVISORY": 19
+    },
+    "language_counts": {
+      "hinglish": 65
+    }
+  }
+}

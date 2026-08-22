@@ -1,0 +1,6 @@
+{
+  "name": "SwasthyaSetu AI",
+  "description": "Offline-first multilingual AI healthcare navigation, emergency triage, insurance coverage analysis, and out-of-pocket cost calculation platform for India.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

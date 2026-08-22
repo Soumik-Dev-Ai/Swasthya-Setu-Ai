@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwasthaSetu Backend Production Report</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #24292e;
+    background-color: #fff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  h1 { font-size: 2em; border-bottom: 1px solid #eaecef; padding-bottom: .3em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #eaecef; padding-bottom: .3em; }
+  code {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+  }
+  pre code { background-color: transparent; padding: 0; }
+  blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: .25em solid #dfe2e5;
+    margin: 0;
+  }
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+  }
+  table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+  table tr:nth-child(2n) { background-color: #f6f8fa; }
+</style>
+</head>
+<body>
+<h1>Swasthya Setu AI ?" Backend Production Report</h1>
+<p>This document serves as the authoritative production architecture reference for the Swasthya Setu AI backend. It details exactly how the API layer functions, the AI integration strategies, database configurations, and failover mechanisms.</p>
+<h2>1. High-Level Architecture</h2>
+<ul>
+<li><strong>Framework:</strong> <code>FastAPI</code> (Python 3.12+)</li>
+<li><strong>Concurrency:</strong> Fully asynchronous (<code>async def</code>) ensuring non-blocking operations for heavy I/O tasks like AI inference and web scraping.</li>
+<li><strong>Data Validation:</strong> Strict boundary enforcement using <code>Pydantic</code> v2 schemas (located in <code>app/schemas/</code>). Invalid client payloads or corrupted LLM JSON strings are instantly rejected with HTTP 422, preventing internal server (500) crashes.</li>
+<li><strong>Entrypoint:</strong> <code>app/main.py</code></li>
+<li><strong>Routing:</strong> API endpoints are mounted via <code>app/api/routers/v2_engine.py</code>.</li>
+</ul>
+<h2>2. Database &amp; State Management</h2>
+<p>Swasthya Setu AI was explicitly designed to be deployed in low-resource or testing environments with <strong>zero devops overhead</strong>.
+- <strong>Engine:</strong> Uses a local SQLite file (<code>swasthyasetu.db</code>) powered by <code>aiosqlite</code> for async concurrency. 
+- <strong>Auto-Provisioning:</strong> The backend checks the <code>DATABASE_URL</code> during the <code>startup</code> event. If it detects a <code>sqlite</code> string, it automatically creates the necessary tables using SQLAlchemy's <code>Base.metadata.create_all</code>. 
+- <strong>Production Scaling:</strong> If hosted on a cloud provider like AWS, the system can instantly switch to PostgreSQL simply by changing the <code>DATABASE_URL</code> in the <code>.env</code> file (e.g., <code>postgresql+asyncpg://...</code>) and running Alembic migrations (<code>alembic upgrade head</code>).</p>
+<h2>3. The AI Vision Cascade (Triage Module)</h2>
+<p>The backend features a highly resilient, fault-tolerant Vision LLM pipeline designed to never leave a patient stranded.
+- <strong>File:</strong> <code>app/services/vision_service.py</code>
+- <strong>Provider Cascade:</strong> 
+  1. <code>gemini/gemini-1.5-flash</code> (Primary)
+  2. <code>groq/llama-3.2-90b-vision-preview</code> (Fallback 1)
+  3. <code>nvidia/llama-3.1-70b-instruct</code> (Fallback 2)
+- <strong>Library:</strong> Powered by <code>litellm</code> which handles unified prompt translation and routing.
+- <strong>Security Guardrails:</strong> Images are strictly checked before they reach the AI. Max size is <code>8MB</code> (<code>VISION_MAX_IMAGE_BYTES</code>), and MIME types are whitelisted to <code>image/jpeg, image/png, image/webp</code>.
+- <strong>Fail-Safe Mechanism:</strong> If every provider in the cascade hits rate limits or times out, the system catches the exception and returns a dummy <code>uncertain</code> signal (<code>confidence: 0</code>). The core Deterministic Safety Gate will then evaluate the text symptoms on its own.</p>
+<h2>4. Precision OSINT Scraper (Cost Engine)</h2>
+<p>To prevent the AI from hallucinating treatment costs, the backend implements a real-time web scraper.
+- <strong>File:</strong> <code>app/services/precision_service.py</code>
+- <strong>Scraper:</strong> Uses <code>duckduckgo_search</code> (<code>DDGS</code>) to perform targeted OSINT queries.
+- <strong>Target Boundaries:</strong> Queries are strictly confined using <code>site:nih.gov OR site:who.int OR site:mayoclinic.org</code> to ensure only peer-reviewed medical pricing and data are injected.
+- <strong>Strict Latency Limits:</strong> The entire scrape is wrapped in an <code>asyncio.wait_for</code> timeout strictly capped at <strong>3.5 seconds</strong>. If the network stalls, the backend aborts the scrape, swallows the error, and returns empty arrays so the frontend can seamlessly render its offline-first local estimates without delaying the user.</p>
+<h2>5. Security &amp; Rate Limiting</h2>
+<ul>
+<li><strong>CORS:</strong> Handled by FastAPI's <code>CORSMiddleware</code>. Allowed origins are configured in <code>settings.CORS_ORIGINS</code> (defaults to Vite's local ports <code>5173</code>).</li>
+<li><strong>Rate Limiting:</strong> Protects the advanced AI endpoints (e.g., <code>/facilities/advanced-search</code>) using <code>slowapi</code>. Currently throttled at <code>10 requests per minute</code> per IP (<code>ADVANCED_SEARCH_RATE_LIMIT</code>) to prevent malicious token draining on your paid AI accounts.</li>
+</ul>
+<h2>6. Environment Configuration (<code>.env</code>)</h2>
+<p>The backend strictly relies on the <code>.env</code> file (loaded via <code>pydantic-settings</code>). Keys are NEVER hardcoded in the repository.
+- <code>GEMINI_API_KEY</code>, <code>GROQ_API_KEY</code>, <code>NVIDIA_API_KEY</code>
+- <code>GOOGLE_MAPS_API_KEY</code> (Optional; frontend falls back to Pigeon Maps / SVG if missing).
+- <code>ENABLE_WEB_SCRAPE=True</code> (Feature toggle for the OSINT precision scraper).</p>
+<hr />
+<p><em>End of Report. The backend is verified stable, strictly bounded by Pydantic, and cleared for live production usage.</em></p>
+</body>
+</html>
