@@ -28,7 +28,6 @@ from dataclasses import dataclass
 from typing import Any
 
 from . import v2_data
-from .cache import vision_cache
 from ..core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -51,6 +50,11 @@ class VisionSignal:
     confidence: int
     model_version: str
     source: str
+    grounding_reference: str | None = None
+    grounding_verified: bool = False
+    # The model's own one-line justification — the grounding verifier scores
+    # overlap against THIS, not against the structured fields.
+    reason: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -59,12 +63,18 @@ class VisionSignal:
             "confidence": self.confidence,
             "model_version": self.model_version,
             "source": self.source,
+            "grounding_reference": self.grounding_reference,
+            "grounding_verified": self.grounding_verified,
+            "reason": self.reason,
         }
 
 
-# Hard-coded prompt. Critical: this is the *only* prompt the vision model
-# sees. It constrains output to structured categories — no diagnosis,
-# no treatment, no prose advice.
+# Hard-coded prompt. Critical: this is effectively the *only* prompt the
+# vision model sees. It constrains output to structured categories — no
+# diagnosis, no treatment, no prose advice. When the Knowledge Engine has
+# retrieved guideline context, the prompt additionally requires the model
+# to cite which retrieved chunk supports its reading (grounding_reference)
+# — that citation is mechanically verified downstream before use.
 _VISION_PROMPT = (
     "You are a medical-image triage assistant. Classify the image ONLY "
     "into the structured fields below. Do NOT provide diagnosis, "
@@ -73,16 +83,20 @@ _VISION_PROMPT = (
     "{ \"visual_symptom_category\": <one of: "
     + ", ".join(ALLOWED_CATEGORIES)
     + ">, \"visual_urgency_signal\": <one of: emergency | non_serious | uncertain>, "
-    "\"confidence\": <0-100 int> }\n"
+    "\"confidence\": <0-100 int>, \"reason\": <one short sentence>, "
+    "\"grounding_reference\": <chunk id from RETRIEVED_GUIDELINE_CONTEXT that "
+    "supports this classification, or null if none applies> }\n"
+    "If no retrieved chunk adequately supports the classification, set "
+    "grounding_reference to null rather than reasoning from memory.\n"
 )
 
 
-# (env-key-name, litellm model string). Order = cascade order.
-_CASCADE: tuple[tuple[str, str], tuple[str, str], tuple[str, str]] = (
-    ("GEMINI_API_KEY", "gemini/gemini-1.5-flash"),
-    ("GROQ_API_KEY", "groq/llama-3.2-90b-vision-preview"),
-    ("NVIDIA_API_KEY", "nvidia/llama-3.1-70b-instruct"),
-)
+from app.services.provider_registry import get_cascade
+
+
+def _get_vision_cascade() -> list[tuple[str, str]]:
+    """Dynamic — resolved at startup, always points to the best available model."""
+    return get_cascade("vision")
 
 
 def _encode_image_for_llm(image_bytes: bytes, mime_type: str) -> dict[str, str]:
@@ -120,13 +134,58 @@ def _parse_vision_output(text: str) -> VisionSignal | None:
     except (TypeError, ValueError):
         confidence = 0
 
+    grounding_reference = obj.get("grounding_reference")
+    if grounding_reference is not None:
+        grounding_reference = str(grounding_reference).strip() or None
+
     return VisionSignal(
         visual_symptom_category=category,
         visual_urgency_signal=urgency,
         confidence=confidence,
         model_version="parsed",
         source="vision_llm_cascade",
+        grounding_reference=grounding_reference,
+        reason=str(obj.get("reason", "")).strip()[:500],
     )
+
+
+async def _retrieve_guideline_chunks(symptoms_text: str) -> list[dict[str, str]]:
+    """Fetch guideline chunks for grounding the vision cascade.
+
+    Returns [] when the corpus is empty, the text carries a red flag
+    (the safety gate already decided — grounding adds nothing), or on any
+    internal failure. Never raises; grounding is a strict enhancement,
+    absent-it-only means the cascade runs ungrounded as before.
+    """
+    try:
+        if not symptoms_text.strip():
+            return []
+        from .safety_layer import enforce_red_flag_safety
+
+        verdict = enforce_red_flag_safety(
+            symptoms_text=symptoms_text,
+            frontend_flags=[],
+            text_level=1,
+            visual_urgency_signal=None,
+        )
+        if verdict.emergency:
+            return []  # already L4 by deterministic authority
+        from app.db.database import AsyncSessionLocal
+        from .rag.retriever import search_corpus
+
+        async with AsyncSessionLocal() as session:
+            hits = await search_corpus(session, symptoms_text, corpus="clinical")
+        return [
+            {
+                "chunk_id": h.chunk_id,
+                "text": h.text,
+                "source_name": h.source_name,
+                "section_path": h.section_path,
+            }
+            for h in hits
+        ]
+    except Exception:
+        return []
 
 
 async def analyze_image(
@@ -140,37 +199,43 @@ async def analyze_image(
     Returns a VisionSignal always; on every-provider-fail returns a
     `uncertain` signal with confidence=0. Never raises — the safety
     layer is designed to be safe on uncertain input.
+
+    Note (Phase 3 item B5): vision results are intentionally NOT cached.
+    Patient images and their analyses are sensitive, per-session data, and
+    doc 04 §6 / NFR-6 forbid retaining them beyond the active session.
     """
-    # Stable cache key on image bytes (small SHA) + symptoms excerpt.
-    import hashlib
-
-    h = hashlib.sha256(image_bytes).hexdigest()[:24]
-    cache_key = vision_cache.make_key("vision", h, mime_type, symptoms_text[:80])
-    cached = await vision_cache.get(cache_key)
-    if cached is not None:
-        return cached  # type: ignore[return-value]
-
     if not _any_vision_key_set():
-        signal = VisionSignal(
+        return VisionSignal(
             visual_symptom_category="unknown",
             visual_urgency_signal=URGENCY_UNCERTAIN,
             confidence=0,
             model_version="cascade.no_keys",
             source="vision_llm_cascade",
         )
-        await vision_cache.set(cache_key, signal, ttl_seconds=settings.CACHE_TTL_SECONDS)
-        return signal
+
+    # Grounding: fetch guideline context before engaging any provider.
+    # Absent/empty corpus → the cascade runs exactly as it always has.
+    guideline_chunks = await _retrieve_guideline_chunks(symptoms_text)
+    retrieved_ids = [c["chunk_id"] for c in guideline_chunks]
+    retrieved_texts = {c["chunk_id"]: c["text"] for c in guideline_chunks}
+
+    prompt = _VISION_PROMPT
+    if guideline_chunks:
+        context_lines = ["RETRIEVED_GUIDELINE_CONTEXT (cite chunk ids exactly):"]
+        for chunk in guideline_chunks:
+            context_lines.append(f"[{chunk['chunk_id']}] {chunk['text'][:900]}")
+        prompt = "\n".join(context_lines) + "\n\n" + _VISION_PROMPT
 
     image_part = _encode_image_for_llm(image_bytes, mime_type)
     user_content: list[dict[str, Any]] = [
-        {"type": "text", "text": _VISION_PROMPT},
+        {"type": "text", "text": prompt},
         image_part,
     ]
     if symptoms_text:
         user_content.append({"type": "text", "text": f"Patient symptoms: {symptoms_text[:400]}"})
 
     last_err = ""
-    for env_key, model in _CASCADE:
+    for env_key, model in _get_vision_cascade():
         api_key = getattr(settings, env_key, "")
         if not api_key:
             continue
@@ -182,23 +247,55 @@ async def analyze_image(
                     api_key=api_key,
                     messages=[{"role": "user", "content": user_content}],
                     temperature=0.0,
-                    max_tokens=120,
+                    max_tokens=160,
                 ),
                 timeout=15.0,
             )
             text = (response.choices[0].message.content or "").strip()
             signal = _parse_vision_output(text)
+            if signal is not None and signal.grounding_reference:
+                # Mechanical verification before the citation is trusted:
+                # a hallucinated/misapplied reference is a stage failure.
+                from .rag.verifier import verify_grounding
+
+                claimed = signal.reason or (
+                    f"{signal.visual_symptom_category} {signal.visual_urgency_signal}"
+                )
+                check = verify_grounding(
+                    grounding_reference=signal.grounding_reference,
+                    retrieved_chunk_ids=retrieved_ids,
+                    claimed_reason=claimed,
+                    cited_chunk_text=retrieved_texts.get(signal.grounding_reference),
+                )
+                if not check.ok:
+                    last_err = f"{model}: grounding-unverified ({check.reason})"
+                    logger.warning("Vision grounding rejected on %s: %s", model, check.reason)
+                    continue  # try the next provider; never accept unverified
+                signal.grounding_verified = True
+            if (
+                signal is not None
+                and not signal.grounding_reference
+                and retrieved_ids
+            ):
+                # Phase-5 item 5E: guideline chunks WERE retrieved and given
+                # to the model, yet it cited none — an ungrounded answer is
+                # a cascade stage failure, never an accepted pass-through.
+                last_err = f"{model}: ungrounded ({len(retrieved_ids)} chunks retrieved, none cited)"
+                logger.warning(
+                    "[Cascade] %s failed mid-session: ungrounded output despite %s retrieved chunks. Falling through.",
+                    model, len(retrieved_ids),
+                )
+                continue
             if signal is not None:
                 signal.model_version = f"cascade.{model}"
-                await vision_cache.set(cache_key, signal, ttl_seconds=settings.CACHE_TTL_SECONDS)
                 return signal
             last_err = f"{model}: parse-failed"
         except asyncio.TimeoutError:
             last_err = f"{model}: timeout"
-            logger.warning("Vision cascade %s timed out", model)
+            logger.warning("[Cascade] %s failed mid-session: timeout. Falling through.", model)
         except Exception as exc:
             last_err = f"{model}: {exc}"
-            logger.warning("Vision cascade %s failed: %s", model, exc)
+            logger.warning("[Cascade] %s failed mid-session: %s. Falling through.", model, exc)
 
     signal = VisionSignal(
         visual_symptom_category="unknown",
@@ -207,7 +304,6 @@ async def analyze_image(
         model_version=f"cascade.failed",
         source="vision_llm_cascade",
     )
-    await vision_cache.set(cache_key, signal, ttl_seconds=settings.CACHE_TTL_SECONDS)
     return signal
 
 

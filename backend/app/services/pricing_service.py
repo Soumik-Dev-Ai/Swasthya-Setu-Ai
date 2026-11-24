@@ -144,12 +144,9 @@ _VISION_PROMPT_DISABLED = (
     "Do not include any prose, explanation, or markdown fences.\n"
 )
 
-_CASCADE_MODELS: tuple[tuple[str, str], ...] = (
-    # (env-key-name, model-string-for-litellm)
-    ("GEMINI_API_KEY", "gemini/gemini-1.5-flash"),
-    ("GROQ_API_KEY", "groq/llama-3.1-70b-versatile"),
-    ("NVIDIA_API_KEY", "nvidia/llama-3.1-70b-instruct"),
-)
+# Registry-served cascade (phase-5 item 5D): providers whose keys are
+# configured, preference-ordered — model names are never hardcoded here.
+# from app.services.provider_registry import get_cascade  (imported lazily below)
 
 
 async def _extract_price_with_llm(snippets: list[str]) -> PriceEstimate:
@@ -167,10 +164,12 @@ async def _extract_price_with_llm(snippets: list[str]) -> PriceEstimate:
             model_version="cascade.unavailable",
         )
 
+    from app.services.provider_registry import get_cascade
+
     body = "\n".join(snippets[:6])
     last_err: str = ""
 
-    for env_key, model in _CASCADE_MODELS:
+    for env_key, model in get_cascade("text"):
         api_key = getattr(settings, env_key, "")
         if not api_key:
             continue
@@ -287,10 +286,43 @@ async def get_price_estimate(
     return estimate
 
 
+async def lookup_as_of(db, disease_label: str | None) -> str | None:
+    """Return the verification date of the freshest ACTIVE government-cost
+    row matching this disease label, or None when only the curated static
+    dataset covers it.
+
+    The frontend is required to display this ("Estimated cost as of [date].")
+    — doc 16 §2.2's end-user freshness contract.
+    """
+    if not disease_label:
+        return None
+    try:
+        from sqlalchemy import select
+
+        from app.models.government_cost import GovernmentCost
+
+        needle = " ".join(str(disease_label).lower().split())
+        if not needle:
+            return None
+        rows = (
+            await db.execute(
+                select(GovernmentCost).where(GovernmentCost.active.is_(True))
+            )
+        ).scalars().all()
+        for row in rows:
+            key = " ".join((row.procedure_key or "").lower().split())
+            if key and (key in needle or needle in key):
+                return row.last_verified_date.date().isoformat()
+        return None
+    except Exception:
+        return None
+
+
 __all__ = [
     "PriceEstimate",
     "VERIFIED_SOURCE",
     "COMMUNITY_SOURCE",
     "NO_ESTIMATE",
     "get_price_estimate",
+    "lookup_as_of",
 ]

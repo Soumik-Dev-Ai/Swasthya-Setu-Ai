@@ -110,12 +110,45 @@ def affordability_percent(total: float, stats: dict) -> int:
 
 # ------------------------------------------------------------------ cost
 
-def estimate_cost(hospital_id: str, disease_id: str, severity: str) -> int:
+def estimate_cost(hospital_id: str, disease_id: str, severity: str, base_override: int | None = None) -> int:
     d = D.disease_by_id(disease_id)
     h = D.hospital_by_id(hospital_id) or D.HOSPITALS[0]
     city = D.city_by_id(h["cityId"])
+    if base_override is not None:
+        # Hybrid path (phase-2 item 2B): base cost from the freshest ACTIVE
+        # GovernmentCost row — a single verified package rate, so there is no
+        # severity ladder to index into.
+        return round(base_override * h["priceIndex"] * city["priceIndex"])
     sev_idx = max(d["minSeverity"], D.SEVERITY_INDEX[severity])
     return round(d["base"][sev_idx] * h["priceIndex"] * city["priceIndex"])
+
+
+async def fallback_gov_cost(db, disease_id: str):
+    """Hybrid strategy (item 2B): curated DISEASES first. When the disease is
+    NOT curated, resolve the base cost from the freshest ACTIVE GovernmentCost
+    row for this procedure key (the ETL-verified government package rate).
+    Returns the row, or None when the curated path should be used / nothing
+    verified exists. Never invents a value."""
+    if db is None:
+        return None
+    if any(d["id"] == disease_id for d in D.DISEASES):
+        return None  # curated — caller uses the standard severity-ladder path
+    try:
+        from sqlalchemy import nullslast, select
+
+        from app.models.government_cost import GovernmentCost
+
+        row = (
+            await db.execute(
+                select(GovernmentCost)
+                .where(GovernmentCost.procedure_key == disease_id, GovernmentCost.active.is_(True))
+                .order_by(nullslast(GovernmentCost.effective_date.desc()), GovernmentCost.version.desc())
+                .limit(1)
+            )
+        ).scalar_one_or_none()
+        return row
+    except Exception:
+        return None
 
 
 def cost_benchmark(city_id: str, disease_id: str, severity: str) -> dict:
@@ -125,11 +158,11 @@ def cost_benchmark(city_id: str, disease_id: str, severity: str) -> dict:
     return {"min": costs[0] if costs else 0, "max": costs[-1] if costs else 0, "median": median}
 
 
-def best_matches(city_id: str, disease_id: str, severity: str, stats: dict | None, pmjay_only: bool) -> list[dict]:
+def best_matches(city_id: str, disease_id: str, severity: str, stats: dict | None, pmjay_only: bool, base_override: int | None = None) -> list[dict]:
     hs = [h for h in D.HOSPITALS if h["cityId"] == city_id and (not pmjay_only or h["pmjay"])]
     rated = []
     for h in hs:
-        total = estimate_cost(h["id"], disease_id, severity)
+        total = estimate_cost(h["id"], disease_id, severity, base_override=base_override)
         affordable_pct = affordability_percent(total, stats) if stats else None
         aff_score = affordable_pct if stats is not None else 70
         combined = h["score"] * 0.55 + aff_score * 0.45
@@ -218,7 +251,7 @@ def analyse_policy(coverage: int, policy_type: str, network_ids: list[str]) -> d
 
 # ------------------------------------------------------------------ schemes
 
-def match_schemes(profile: dict) -> list[dict]:
+async def match_schemes(profile: dict, db=None) -> list[dict]:
     out = []
     for s in D.SCHEMES:
         pct = s["match"](profile)
@@ -237,6 +270,54 @@ def match_schemes(profile: dict) -> list[dict]:
         if keep:
             filtered.append(r)
     filtered.sort(key=lambda r: r["pct"], reverse=True)
+
+    # Hybrid merge (item 2C): the SQL schemes table is the ETL-provenance
+    # source. Name-matched rows OVERRIDE the portal fields (the DB is the
+    # freshest verified source); SQL-only schemes are appended as
+    # general-eligibility entries carrying their REAL coverage rules and
+    # eligibility notes — no fabricated match percentages (free-text
+    # coverage_rules have no rule engine to evaluate).
+    if db is not None:
+        try:
+            from sqlalchemy import select
+
+            from app.models.scheme import Scheme
+
+            sql_rows = (await db.execute(select(Scheme))).scalars().all()
+        except Exception:
+            sql_rows = []
+        if sql_rows:
+            by_name = {r.name.strip().lower(): r for r in sql_rows}
+            for r in filtered:
+                row = by_name.get(str(r["scheme"]["name"]).strip().lower())
+                if row is not None and (row.registration_portal_url or row.enrollment_method):
+                    r["scheme"]["registration_portal_url"] = row.registration_portal_url
+                    r["scheme"]["enrollment_method"] = (
+                        row.enrollment_method or r["scheme"].get("enrollment_method") or "unknown"
+                    )
+            seen = {str(r["scheme"]["name"]).strip().lower() for r in filtered}
+            for row in sorted(sql_rows, key=lambda r: str(r.name)):
+                if str(row.name).strip().lower() in seen:
+                    continue
+                filtered.append({
+                    "scheme": {
+                        "id": f"sql-{row.id}",
+                        "name": row.name,
+                        "short": row.name[:40],
+                        "type": "State registry (ETL-sourced)",
+                        "benefit": row.coverage_rules or "",
+                        "docs": row.eligibility_notes or "",
+                        "enrollment_method": row.enrollment_method or "unknown",
+                        "registration_portal_url": row.registration_portal_url,
+                        # Honest marker: no rule engine ran — this is general
+                        # eligibility info, NOT a computed match. The frontend
+                        # should render it without a "% matched" badge.
+                        "match_basis": "general_eligibility",
+                    },
+                    # Display-floor so the row passes the >=30 filter; the
+                    # match_basis flag above is the honest signal.
+                    "pct": 50,
+                })
     return filtered
 
 
@@ -248,16 +329,99 @@ def _scheme_public(s: dict) -> dict:
         "type": s["type"],
         "benefit": s["benefit"],
         "docs": s["docs"],
+        "enrollment_method": s.get("enrollment_method", "unknown"),
+        "registration_portal_url": s.get("registration_portal_url"),
     }
 
 
 # ------------------------------------------------------------------ facilities
 
-def search_facilities(
+
+def _directions_url(h: dict) -> str | None:
+    """Static Google Maps directions link (doc 25 §3). No API key, no billing —
+    the browser/app opens maps with the destination pre-filled."""
+    if "lat" not in h or "lon" not in h or h["lat"] is None or h["lon"] is None:
+        return None
+    return f"https://www.google.com/maps/dir/?api=1&destination={h['lat']},{h['lon']}"
+
+
+# Facility.type → honest display label (the type is real governed data;
+# beds/score/nabh etc. do NOT exist on the SQL model and are omitted rather
+# than fabricated).
+_FACILITY_TYPE_LABEL = {
+    "SC": "Sub-Centre",
+    "PHC": "Primary Health Centre",
+    "CHC": "Community Health Centre",
+    "PM-JAY_Hospital": "PM-JAY Hospital",
+    "PMBJP_Pharmacy": "PMBJP Pharmacy",
+}
+
+
+async def _sql_facility_fallback(db, city_id: str, filters: dict, query: str) -> list[dict]:
+    """Hybrid fallback (item 2A): the curated in-memory hospitals don't cover
+    this city — search the governed SQL `facilities` table instead (populated
+    by the doc-25 §4 acquisition pipeline). Only real columns are used; the
+    capability filters (er24/icu/blood/nabh/beds) have no SQL counterpart and
+    are honestly NOT applied to these rows."""
+    from sqlalchemy import or_, select
+
+    from app.models.facility import Facility
+
+    stmt = select(Facility).where(
+        or_(
+            Facility.district.ilike(f"%{city_id}%"),
+            Facility.state.ilike(f"%{city_id}%"),
+        )
+    )
+    if filters.get("pmjay"):
+        stmt = stmt.where(Facility.pm_jay_empaneled.is_(True))
+    q = query.strip()
+    if q:
+        stmt = stmt.where(Facility.name.ilike(f"%{q}%"))
+    facs = (await db.execute(stmt)).scalars().all()
+    if not facs:
+        return []
+
+    # Distance reference point: the curated city's coordinates when the id IS
+    # a curated city, otherwise the centroid of the matched facilities.
+    city = None
+    for c in D.CITIES:
+        if c["id"] == city_id:
+            city = c
+            break
+    if city is not None:
+        ref_lat, ref_lon = city["lat"], city["lon"]
+    else:
+        ref_lat = sum(f.lat for f in facs) / len(facs)
+        ref_lon = sum(f.lng for f in facs) / len(facs)
+
+    rows = []
+    for f in facs:
+        h = {
+            "id": f"sql-{f.id}",
+            "name": f.name,
+            "cityId": city_id,
+            "lat": f.lat,
+            "lon": f.lng,
+            "tier": _FACILITY_TYPE_LABEL.get(f.type, f.type),
+            "pmjay": bool(f.pm_jay_empaneled),
+            "phone": f.phone,
+        }
+        rows.append({
+            "hospital": h,
+            "km": D.haversine(ref_lat, ref_lon, f.lat, f.lng),
+            "directions_url": _directions_url(h),
+            "last_verified_date": f.last_verified_date.isoformat() if f.last_verified_date else None,
+        })
+    return rows
+
+
+async def search_facilities(
     city_id: str,
     filters: dict,
     query: str,
     sort: str,
+    db=None,
 ) -> list[dict]:
     city = D.city_by_id(city_id)
     rows = []
@@ -280,12 +444,16 @@ def search_facilities(
         if q and q not in h["name"].lower():
             continue
         km = D.haversine(city["lat"], city["lon"], h["lat"], h["lon"])
-        rows.append({"hospital": h, "km": km})
+        rows.append({"hospital": h, "km": km, "directions_url": _directions_url(h)})
+
+    # Hybrid fallback (item 2A): only when the curated set has nothing.
+    if not rows and db is not None:
+        rows = await _sql_facility_fallback(db, city_id, filters, query)
 
     if sort == "cost":
-        rows.sort(key=lambda r: r["hospital"]["priceIndex"])
+        rows.sort(key=lambda r: r["hospital"].get("priceIndex") or 1.0)
     elif sort == "quality":
-        rows.sort(key=lambda r: r["hospital"]["score"], reverse=True)
+        rows.sort(key=lambda r: r["hospital"].get("score") or 0, reverse=True)
     else:
         rows.sort(key=lambda r: r["km"])
     return rows
@@ -294,12 +462,21 @@ def search_facilities(
 # ------------------------------------------------------------------ emergency sync
 
 def emergency_sync_cases() -> list[dict]:
-    """Mock list of recently triaged level-4 emergency patients."""
+    """Synthetic demo list of recently triaged level-4 emergency cases.
+
+    These are fixture records for the ASHA demo board, not real patients.
+    Every row is explicitly marked `synthetic: True` and uses obviously
+    placeholder names so this data can never be mistaken for — or leak —
+    real patient information (phase-0 finding N2).
+
+    TODO(phase-2): once the frontend sends auth on this path, gate it
+    behind ASHA/ADMIN auth and remove the synthetic fixtures entirely.
+    """
     now_ms = 1724150000000  # deterministic timestamp anchor
     return [
         {
             "id": "c-sync-1",
-            "name": "Ramesh Kumar",
+            "name": "DEMO Patient A",
             "age": "54",
             "sex": "m",
             "cityId": "delhi",
@@ -308,10 +485,11 @@ def emergency_sync_cases() -> list[dict]:
             "level": 4,
             "assessedAt": now_ms - 1000 * 60 * 4,
             "status": "pending",
+            "synthetic": True,
         },
         {
             "id": "c-sync-2",
-            "name": "Sunita Devi",
+            "name": "DEMO Patient B",
             "age": "28",
             "sex": "f",
             "cityId": "bhopal",
@@ -320,10 +498,11 @@ def emergency_sync_cases() -> list[dict]:
             "level": 4,
             "assessedAt": now_ms - 1000 * 60 * 12,
             "status": "pending",
+            "synthetic": True,
         },
         {
             "id": "c-sync-3",
-            "name": "Md. Irfan",
+            "name": "DEMO Patient C",
             "age": "6",
             "sex": "m",
             "cityId": "kolkata",
@@ -332,6 +511,7 @@ def emergency_sync_cases() -> list[dict]:
             "level": 4,
             "assessedAt": now_ms - 1000 * 60 * 22,
             "status": "pending",
+            "synthetic": True,
         },
     ]
 
@@ -444,7 +624,11 @@ def search_facilities_advanced(
     facility list is still returned (graceful degradation).
     """
     # Reuse the existing search to keep filter semantics identical.
-    base_results = search_facilities(city_id, filters, query, "near")
+    # (search_facilities is async since the hybrid SQL fallback — no db here,
+    # so the fallback is skipped; the sync wrapper runs it on a fresh loop.)
+    import asyncio
+
+    base_results = asyncio.run(search_facilities(city_id, filters, query, "near"))
     if not include_pricing:
         for r in base_results:
             r["price"] = None
@@ -534,7 +718,7 @@ async def search_facilities_advanced_async(
     price_location_label: str | None = None,
 ) -> list[dict]:
     """Async entry point used by the FastAPI router."""
-    base_results = search_facilities(city_id, filters, query, "near")
+    base_results = await search_facilities(city_id, filters, query, "near")
     if not include_pricing:
         for r in base_results:
             r["price"] = None

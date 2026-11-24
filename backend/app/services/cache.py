@@ -91,8 +91,6 @@ class TTLCache:
 
 # Singleton cache for the cost-engine fallback path.
 cost_cache = TTLCache(max_size=512)
-# Singleton cache for the vision-LLM pathway.
-vision_cache = TTLCache(max_size=256)
 
 
-__all__ = ["TTLCache", "cost_cache", "vision_cache"]
+__all__ = ["TTLCache", "cost_cache"]
