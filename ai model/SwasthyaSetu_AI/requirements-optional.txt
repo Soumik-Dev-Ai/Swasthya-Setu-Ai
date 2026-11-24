@@ -1,0 +1,3 @@
+# Used only by scripts/inspect_track_a_errors.py; it pulls a large PyTorch
+# dependency tree and is intentionally excluded from the default model API.
+sentence-transformers>=2.2.0

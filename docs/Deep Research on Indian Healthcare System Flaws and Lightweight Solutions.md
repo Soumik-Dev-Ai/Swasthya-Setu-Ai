@@ -10,7 +10,9 @@ Decades later, this baseline remains unachieved. The current public infrastructu
 
 This stark disparity necessitates a critical re-evaluation of how healthcare is delivered, recorded, and financed in rural India. Addressing these deep-seated systemic flaws requires a departure from resource-heavy, capital-intensive infrastructure models. Instead, the focus must shift toward highly scalable, lightweight digital platforms capable of functioning within the severe constraints of the rural digital ecosystem. Rural and lower-income populations predominantly utilize basic smartphones or feature phones characterized by low processing power, minimal onboard storage, and intermittent internet connectivity. Therefore, any 
 
-systemic improvement must be engineered to operate on edge-computing principles, offlinefirst architectures, and asynchronous data synchronization protocols. **The Informal Healthcare Ecosystem: A Regulatory and Clinical Conundrum** 
+systemic improvement must be engineered to operate on edge-computing principles, offlinefirst architectures, and asynchronous data synchronization protocols. 
+
+## **The Informal Healthcare Ecosystem: A Regulatory and Clinical Conundrum** 
 
 The most significant systemic adaptation to the chronic shortage of qualified medical personnel in rural India has been the proliferation of informal healthcare providers. Often referred to as non-degree allopathic practitioners (NDAPs) or rural medical practitioners, these individuals lack formal medical qualifications or regulatory registration, yet they form the absolute backbone of primary care delivery for marginalized populations. 
 
@@ -49,7 +51,7 @@ The training effectively closed half the performance gap between informal provid
 
 public sector in terms of correct treatment. Notably, the program resulted in an increased patient caseload for these providers in villages without a public-sector clinic, but caseloads did not increase where patients had the choice to attend a formally trained provider, mitigating concerns that training would unfairly legitimize illegal practices. However, the study also revealed a persistent flaw: training did not alter the providers' propensity to prescribe unnecessary medicines and antibiotics, a practice closely tied to their revenue generation model of integrated consulting and dispensing. 
 
-This ecosystem represents a massive opportunity for lightweight digital intervention. Rather than attempting to eradicate an informal workforce that serves as the de facto primary care network for hundreds of millions of citizens, digital platforms can be engineered to systematically upskill and regulate them. A lightweight application featuring an AI-powered symptom checker, utilizing Natural Language Processing (NLP) optimized for regional dialects, could act as an automated clinical decision-support system<sup>1</sup> . By inputting basic patient symptoms, the AI could map the data against established medical protocols, suggesting . To address the issue of accurate urgency levels and generating condition-specific checklists<sup>1</sup> unnecessary medication dispensing, the platform could integrate an evidence-based pharmaceutical reference guide. When the provider re-enters a network coverage zone, the application can asynchronously sync the anonymized epidemiological data to regional health authorities, transforming a previously opaque, informal sector into a highly visible public health surveillance network. 
+This ecosystem represents a massive opportunity for lightweight digital intervention. Rather than attempting to eradicate an informal workforce that serves as the de facto primary care network for hundreds of millions of citizens, digital platforms can be engineered to systematically upskill and regulate them. A lightweight application featuring an AI-powered symptom checker, utilizing Natural Language Processing (NLP) optimized for regional dialects, could act as an automated clinical decision-support system<sup>1</sup> . By inputting basic patient symptoms, the AI could map the data against established medical protocols, suggesting accurate urgency levels and generating condition-specific checklists<sup>1</sup> . To address the issue of unnecessary medication dispensing, the platform could integrate an evidence-based pharmaceutical reference guide. When the provider re-enters a network coverage zone, the application can asynchronously sync the anonymized epidemiological data to regional health authorities, transforming a previously opaque, informal sector into a highly visible public health surveillance network. 
 
 ## **Frontline Data Friction: The ASHA Worker's Analog Burden** 
 
@@ -75,11 +77,21 @@ The workflow of such a lightweight platform fundamentally eliminates manual data
 
 Once data is captured locally, lightweight applications can utilize background synchronization frameworks to silently upload structured data files to central servers only when the device detects a stable network connection. The scale achievable through this architecture is evident in platforms like the Community Health Integrated Platform (CHIP), utilized by over 50,000 
 
-health workers in Rajasthan. During the pandemic, an early version of this application was utilized to screen 14 million beneficiaries. The CHIP application empowers health workers to link family records to national identity databases like Jan Aadhaar, utilize QR code scanners embedded in Aadhar cards for automatic patient data population without network connectivity, and operate entirely offline. Furthermore, it enables complex geographic and epidemiological surveillance, such as tracking larva surveys at the household level, conducting pulse oximetry and thermal scanner integration for symptomatic cases, mapping non-communicable diseases, and silently gathering background GPS data to map regional disease clusters. The sociological impact of deploying these lightweight digital tools is as significant as the technical achievement. Pilot programs of the Sakhi application, developed under the AMRIT initiative in Bihar and Assam, observed a profound transformation in the community's perception of ASHA workers. Supported by on-ground mentorship from Gandhi Fellows, ASHAs equipped with digital platforms were perceived as more knowledgeable and professional, transitioning their community image from mere record-keepers to trusted health advisors. By algorithmically segregating high-risk beneficiaries—a feature heavily utilized by 65 percent of ASHAs in the Bihar pilot compared to 45 percent in Assam—the software enabled precision care delivery and facilitated tight coordination between ASHAs, ANMs, and central medical officers. **Software Architecture for the Rural Edge** To successfully execute these interventions, software architecture must be radically optimized. The failure of numerous digital health startups in emerging markets stems from a misunderstanding of the user's digital environment. Building a monolithic application optimized for high-speed fiber internet and flagship smartphones guarantees zero adoption in the rural hinterland. 
+health workers in Rajasthan. During the pandemic, an early version of this application was utilized to screen 14 million beneficiaries. 
+
+The CHIP application empowers health workers to link family records to national identity databases like Jan Aadhaar, utilize QR code scanners embedded in Aadhar cards for automatic patient data population without network connectivity, and operate entirely offline. Furthermore, it enables complex geographic and epidemiological surveillance, such as tracking larva surveys at the household level, conducting pulse oximetry and thermal scanner integration for symptomatic cases, mapping non-communicable diseases, and silently gathering background GPS data to map regional disease clusters. 
+
+The sociological impact of deploying these lightweight digital tools is as significant as the technical achievement. Pilot programs of the Sakhi application, developed under the AMRIT initiative in Bihar and Assam, observed a profound transformation in the community's perception of ASHA workers. Supported by on-ground mentorship from Gandhi Fellows, ASHAs equipped with digital platforms were perceived as more knowledgeable and professional, transitioning their community image from mere record-keepers to trusted health advisors. By algorithmically segregating high-risk beneficiaries—a feature heavily utilized by 65 percent of ASHAs in the Bihar pilot compared to 45 percent in Assam—the software enabled precision care delivery and facilitated tight coordination between ASHAs, ANMs, and central medical officers. 
+
+## **Software Architecture for the Rural Edge** 
+
+To successfully execute these interventions, software architecture must be radically optimized. The failure of numerous digital health startups in emerging markets stems from a misunderstanding of the user's digital environment. Building a monolithic application optimized for high-speed fiber internet and flagship smartphones guarantees zero adoption in the rural hinterland. 
 
 To achieve systemic integration on low-storage, low-performance phones, development must adhere to strict architectural doctrines. The application binary must be exceptionally small. Utilizing cross-platform frameworks like React Native or Flutter Native Modules ensures consistency and rapid deployment across varied hardware architectures while maintaining near-native processing speeds. Alternatively, native development using Kotlin and the MVVM (Model-View-ViewModel) architecture ensures maximum resource efficiency on older Android operating systems. 
 
-Internet connectivity in rural India is highly asymmetric; therefore, applications must operate flawlessly in offline mode. This requires embedding lightweight relational database management systems directly into the application structure. Technologies such as SQLite local persistence or Android's Room database allow health workers and informal providers to access historical patient records, log new vital statistics, and execute clinical decision support algorithms without triggering a network timeout<sup>1</sup> . 
+Internet connectivity in rural India is highly asymmetric; therefore, applications must operate flawlessly in offline mode. This requires embedding lightweight relational database 
+
+management systems directly into the application structure. Technologies such as SQLite local persistence or Android's Room database allow health workers and informal providers to access historical patient records, log new vital statistics, and execute clinical decision support algorithms without triggering a network timeout<sup>1</sup> . 
 
 When a health worker or patient moves into a zone of connectivity, the application must utilize 
 
@@ -91,7 +103,7 @@ Beneath the structural delivery issues lies the most pressing economic flaw of t
 
 ### **Macroeconomic Trends in Health Financing** 
 
-In recent years, the Indian government has aggressively intervened to mitigate this financial toxicity. Macroeconomic data indicates a structurally positive trend. According to National Health Accounts (NHA) estimates, the share of OOPE as a percentage of Total Health Expenditure (THE) has experienced a steep, consistent decline. It dropped from a crippling 69.4 percent in the 2004-05 period, to 62.6 percent in 2014-15, and further down to 39.4 . Concurrently, Government Health Expenditure (GHE) as a percent by the 2021-22 fiscal year<sup>2</sup> percentage of THE has surged from 29.0 percent in 2014-15 to 48.0 percent in 2021-22<sup>2</sup> . This macro-level improvement is heavily attributed to the rollout of expansive social security architectures. The Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (AB-PMJAY) provides an annual health cover of ₹5 lakh per family for secondary and tertiary care hospitalization, effectively acting as an economic shield for approximately 55 crore beneficiaries, which represents the economically vulnerable bottom 40 percent of the nation's demographic. The scheme has also been expanded to cover 6 crore senior citizens aged 70 years and above under the Vay Vandana Card<sup>3</sup> . 
+In recent years, the Indian government has aggressively intervened to mitigate this financial toxicity. Macroeconomic data indicates a structurally positive trend. According to National Health Accounts (NHA) estimates, the share of OOPE as a percentage of Total Health Expenditure (THE) has experienced a steep, consistent decline. It dropped from a crippling 69.4 percent in the 2004-05 period, to 62.6 percent in 2014-15, and further down to 39.4 percent by the 2021-22 fiscal year<sup>2</sup> . Concurrently, Government Health Expenditure (GHE) as a percentage of THE has surged from 29.0 percent in 2014-15 to 48.0 percent in 2021-22<sup>2</sup> . This macro-level improvement is heavily attributed to the rollout of expansive social security architectures. The Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (AB-PMJAY) provides an annual health cover of ₹5 lakh per family for secondary and tertiary care hospitalization, effectively acting as an economic shield for approximately 55 crore beneficiaries, which represents the economically vulnerable bottom 40 percent of the nation's demographic. The scheme has also been expanded to cover 6 crore senior citizens aged 70 years and above under the Vay Vandana Card<sup>3</sup> . 
 
 Additionally, the Pradhan Mantri Ayushman Bharat Health Infrastructure Mission (PM-ABHIM), with a central outlay of ₹64,180 crore, has accelerated the establishment of 1.76 lakh Ayushman Arogya Mandirs—transformed from existing SHCs and PHCs—to provide free comprehensive primary healthcare, further depressing OOPE<sup>2</sup> . The 15th Finance Commission also provided ₹70,051 crore in health grants directed through local governments to bolster this infrastructure. 
 
@@ -140,9 +152,13 @@ The data reveals a critical insight: the overwhelming majority of direct financi
 
 Another severe systemic flaw compounding healthcare costs is institutional fraud and overcharging within the subsidized frameworks. The National Health Authority (NHA) recently levied penalties totaling ₹114 crore against 2,842 hospitals for participating in fraudulent activities under the AB-PMJAY scheme. Nefarious practices include repeated or fabricated 
 
-claims, charging beneficiaries for treatments supposed to be cashless, and medically impossible billing scenarios. The NHA is combatting this by deploying over 100 continuously refined AI algorithms to identify unusual claim patterns prior to payment authorization, alongside mandating biometric authentication for recurring treatments like dialysis cycles. While institutional, server-side AI is necessary, there exists a massive vacuum for patient-side digital intervention. Lower-income users require highly accessible, low-bandwidth tools to protect themselves from financial exploitation and to discover subsidized resources. A lightweight digital architecture utilizing Unstructured Supplementary Service Data (USSD) codes or automated WhatsApp chatbots could revolutionize patient financial literacy. These lean interfaces, requiring zero application installation, could empower rural patients to instantly query their PM-JAY wallet balance, verify real-time hospital empanelment status, and securely report instances of overcharging via SMS. More importantly, to attack the 42.9 percent of OOPE flowing to private pharmacies, these localized chatbots could feature geolocation routing to the nearest of the 18,000 Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP) outlets or Affordable Medicines and Reliable Implants for Treatment (AMRIT) pharmacies<sup>3</sup> . Considering that PMBJP generic medicines are priced 60 to 80 percent lower than market rates, and AMRIT provides branded drugs at half the commercial cost<sup>4</sup> , connecting the rural consumer to these nodes via a 20-kilobyte text message could generate more immediate financial relief than expanding tertiary hospital infrastructure. **Chronic Disease Management and the Medication Adherence Crisis** 
+claims, charging beneficiaries for treatments supposed to be cashless, and medically impossible billing scenarios. The NHA is combatting this by deploying over 100 continuously refined AI algorithms to identify unusual claim patterns prior to payment authorization, alongside mandating biometric authentication for recurring treatments like dialysis cycles. While institutional, server-side AI is necessary, there exists a massive vacuum for patient-side digital intervention. Lower-income users require highly accessible, low-bandwidth tools to protect themselves from financial exploitation and to discover subsidized resources. A lightweight digital architecture utilizing Unstructured Supplementary Service Data (USSD) codes or automated WhatsApp chatbots could revolutionize patient financial literacy. These lean interfaces, requiring zero application installation, could empower rural patients to instantly query their PM-JAY wallet balance, verify real-time hospital empanelment status, and securely report instances of overcharging via SMS. More importantly, to attack the 42.9 percent of OOPE flowing to private pharmacies, these localized chatbots could feature geolocation routing to the nearest of the 18,000 Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP) outlets or Affordable Medicines and Reliable Implants for Treatment (AMRIT) pharmacies<sup>3</sup> . Considering that PMBJP generic medicines are priced 60 to 80 percent lower than market rates, and AMRIT provides branded drugs at half the commercial cost<sup>4</sup> , connecting the rural consumer to these nodes via a 20-kilobyte text message could generate more immediate financial relief than expanding tertiary hospital infrastructure. 
 
-As the epidemiological transition in India accelerates, the rural healthcare burden is shifting aggressively from acute communicable diseases to chronic non-communicable diseases (NCDs), primarily hypertension, cardiovascular disorders, and type 2 diabetes mellitus. The management of these chronic conditions introduces a complex behavioral vulnerability into the health system: patient non-adherence to long-term medication regimens. **The Dynamics of Non-Adherence in Rural Settings** 
+## **Chronic Disease Management and the Medication Adherence Crisis** 
+
+As the epidemiological transition in India accelerates, the rural healthcare burden is shifting aggressively from acute communicable diseases to chronic non-communicable diseases (NCDs), primarily hypertension, cardiovascular disorders, and type 2 diabetes mellitus. The management of these chronic conditions introduces a complex behavioral vulnerability into the health system: patient non-adherence to long-term medication regimens. 
+
+### **The Dynamics of Non-Adherence in Rural Settings** 
 
 Medication adherence is notoriously poor in rural environments. Patients suffering from asymptomatic or slowly progressing chronic conditions frequently abandon their therapeutic protocols due to a lack of immediate physiological feedback, complicated dosing schedules, the geographic friction of visiting distant clinics for refills, and the financial drain of continuous pharmaceutical purchases. Poor adherence in hypertensive patients drastically elevates the risk for catastrophic events such as cerebrovascular disease, chronic heart failure, and coronary incidents, which ultimately require expensive, tertiary interventions that the system cannot support. Similarly, inconsistent medication in type 2 diabetes inhibits glycemic control, expediting systemic organ damage. 
 
@@ -164,17 +180,13 @@ To successfully deploy a healthcare intervention in India, the solution must add
 
 ### **Existing Platforms and Their Capabilities** 
 
-- **Practo:** Originally a doctor directory, Practo evolved into a massive two-sided platform . It holds a 
-
-- offering teleconsultations, medicine delivery, and clinic management SaaS<sup>5</sup> network of over 1 lakh doctors and 70,000 clinics<sup>6</sup> . 
+- **Practo:** Originally a doctor directory, Practo evolved into a massive two-sided platform offering teleconsultations, medicine delivery, and clinic management SaaS<sup>5</sup> . It holds a network of over 1 lakh doctors and 70,000 clinics<sup>6</sup> . 
 
 - **Tata 1mg:** Positioned on a cost-leadership strategy, Tata 1mg focuses heavily on the pharmaceutical space, offering e-pharmacy services, home diagnostics, and affordable generic medication alternatives<sup>7</sup> . 
 
 - **eSanjeevani:** A government-backed national telemedicine service designed to bridge the rural-urban digital health divide by connecting patients in remote areas to specialists<sup>9</sup> . 
 
-- **Treatment Aggregators (Pristyn Care, Medicare Systems):** Platforms like Pristyn Care . Others, like Medicare 
-
-- streamline elective surgeries and offer hospital cost estimations<sup>10</sup> Systems, deploy "Intelligent Care Loops" that feature AI symptom checkers and offline database capabilities, though these operate largely as B2B command centers for hospital CEOs<sup>1</sup> . 
+- **Treatment Aggregators (Pristyn Care, Medicare Systems):** Platforms like Pristyn Care streamline elective surgeries and offer hospital cost estimations<sup>10</sup> . Others, like Medicare Systems, deploy "Intelligent Care Loops" that feature AI symptom checkers and offline database capabilities, though these operate largely as B2B command centers for hospital CEOs<sup>1</sup> . 
 
 ### **Fundamental Flaws: What the Market Couldn't Solve** 
 
@@ -182,7 +194,7 @@ Despite billions in venture capital, the current market has failed to solve the 
 
 **1. The Urban Bias & Connectivity Dependency:** Current platforms assume the user has a high-end smartphone, digital literacy, and stable broadband. eSanjeevani, for instance, requires reliable internet, which limits its autonomous use by marginalized rural populations<sup>11</sup> . Practo's business model relies on urban, middle-class users with the ability to pay for out-ofpocket private care<sup>5</sup> . 
 
-**2. The Financial Disconnect:** This is the most profound failure of the current market. Existing symptom checkers (like Ada or Practo) tell a patient _what_ disease they might have, but no . As detailed earlier, OOPE accounts for 39.4% platform tells them _how to afford the treatment_ of total health expenditure<sup>2</sup> . A user told by an AI to "consult a specialist" is left to navigate complex government subsidies, private insurance deductibles, and hidden hospital costs entirely on their own. 
+**2. The Financial Disconnect:** This is the most profound failure of the current market. Existing symptom checkers (like Ada or Practo) tell a patient _what_ disease they might have, but no platform tells them _how to afford the treatment_ . As detailed earlier, OOPE accounts for 39.4% of total health expenditure<sup>2</sup> . A user told by an AI to "consult a specialist" is left to navigate complex government subsidies, private insurance deductibles, and hidden hospital costs entirely on their own. 
 
 **3. Bypassing Public Infrastructure:** Commercial apps route patients exclusively to their network of private doctors. They completely bypass the government's free, tiered rural infrastructure (ASHA workers, Sub-Centres, and PHCs). This results in rural users either paying for unnecessary private teleconsultations or falling prey to informal, unregistered practitioners. 
 
@@ -194,9 +206,41 @@ SwasthyaSetu AI will disrupt this market by shifting the paradigm from a "Doctor
 
 To solve the connectivity and urban-bias flaws of platforms like Practo, SwasthyaSetu AI will not rely on cloud servers for basic symptom checking. 
 
-Estimated Out-of-Pocket Expense = Total Treatment Cost — (Insurance Coverage + Government Scheme Benefits) 
+**The Mechanism:** The application utilizes a deterministic, rule-based clinical engine embedded 
 
-the platform maps them exclusively to verified, PM-JAY-empaneled hospitals capable of performing cashless interventions. By executing this specific technological process, SwasthyaSetu AI acts as a patient advocate— using edge computing to bypass internet constraints, and utilizing financial algorithms to shield vulnerable populations from healthcare-induced poverty. 
+directly into the app package, using lightweight local databases (such as SQLite)<sup>1</sup> . When a rural user or ASHA worker inputs symptoms (via text or regional voice-to-text dictation), the local CPU processes the rules instantly to categorize urgency (Emergency, Urgent, Routine) without requiring an internet connection. 
+
+### **Process 2: The Treatment Cost Analyzer (Financial Engine)** 
+
+To solve the financial disconnect, SwasthyaSetu AI features a dedicated Cost Analyzer module. This tool mathematically models treatment pathways before the patient commits to a healthcare decision. 
+
+**Step 1: Disease & Hospital Selection:** Once triage identifies the likely medical requirement (e.g., Cataract Surgery, Angioplasty), the user selects the disease, their preferred treatment location (Metro vs. Tier-2 city), and the hospital type (Government vs. Private Multi-specialty)<sup>12</sup> . **Step 2: Funding Preference & Eligibility Check:** The system prompts the user to select their funding route. 
+
+- _Private Funds/Mediclaim:_ The user inputs their private health insurance details. The system parses the policy to identify coverage limits and co-pays. 
+
+- _Government Funds (Subsidies):_ The user inputs basic demographic data. The system checks their potential eligibility for the Ayushman Bharat PM-JAY scheme, which provides cashless coverage of up to ₹5,00,000 per family per year<sup>13</sup> . 
+
+**Step 3: Algorithmic Cost Estimation:** The engine cross-references the required treatment against a database of average market costs and the 1,393 standardized health benefit . packages defined under the PM-JAY scheme<sup>14</sup> 
+
+- _Scenario A (Government Route via PM-JAY):_ If the user selects an empaneled hospital, the system pulls the standardized package rate. For instance, a PM-JAY package for a unilateral total knee replacement covers ₹80,000 to ₹1,20,000<sup>15</sup> . The resulting output shows an Estimated Patient Cost of ₹0 (fully cashless). 
+
+- _Scenario B (Private Route with Mediclaim):_ The system pulls average private market rates and subtracts the user's specific policy limits. 
+
+
+
+- _Scenario C (Uninsured / Out-of-Pocket):_ The system provides a raw breakdown of expected expenses, including pre-evaluation, surgery, and intensive care unit stays (averaging ₹8,000 – ₹30,000 per day in the private market)<sup>12</sup> . 
+
+### **Process 3: Hyper-Local Healthcare Routing** 
+
+Armed with medical urgency and financial reality, the application routes the user to the optimal facility rather than simply the closest private clinic. 
+
+- If the user has a routine ailment, a tight budget, and needs medicines, the app maps them to the nearest Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP) pharmacy for generic drugs that are 60 to 80 percent cheaper than market rates<sup>4</sup> . 
+
+- If the user requires surgery, qualifies for PM-JAY, and faces an urgent medical scenario, the platform maps them exclusively to verified, PM-JAY-empaneled hospitals capable of 
+
+##### performing cashless interventions. 
+
+By executing this specific technological process, SwasthyaSetu AI acts as a patient advocate— using edge computing to bypass internet constraints, and utilizing financial algorithms to shield vulnerable populations from healthcare-induced poverty. 
 
 #### **Works cited** 
 
@@ -234,29 +278,29 @@ the platform maps them exclusively to verified, PM-JAY-empaneled hospitals capab
 
 <u>htps://healthus.ai/medical apps for patients/</u> 
 
-9. eSanjeevani, htp://esanjeevani.mohfw.gov.in/ 10. Treatments and Surgeries Cost at Pristyn Care, 
+9. eSanjeevani, htp://esanjeevani.mohfw.gov.in/ 
 
-- <u>htps://www.pristyncare.com/cost/</u> 
+10. Treatments and Surgeries Cost at Pristyn Care, <u>htps://www.pristyncare.com/cost/</u> 
 
-- 11. Enhancing rural healthcare delivery in India: eSanjeevani and the community - - - - - 
+11. Enhancing rural healthcare delivery in India: eSanjeevani and the community - - - - - 
 
-- <u>htps://nmji.in/enhancing rural healthcare delivery in</u> 
+health officer perspective, htps://nmji.in/enhancing <u>rural healthcare delivery in</u> - - - - - - - 
 
-- health officer perspective, india-esanjeevani-and-the-community-health-ofcer-perspective/ 
+<u>india esanjeevani and the community health ofcer perspective/</u> 
 
-- 12. How to Calculate Your Medical Treatment Cost in India Using Online Tools? - - - - 
+12. How to Calculate Your Medical Treatment Cost in India Using Online Tools? - - - - 
 
-- Impact Guru, htps://www.impactguru.com/info/medical <u>treatment cost</u> - - 
+Impact Guru, htps://www.impactguru.com/info/medical <u>treatment cost</u> - - 
 
-- <u>calculator in india/</u> 
+<u>calculator in india/</u> 
 
-- 13. Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana - myScheme, - 
+13. Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana - myScheme, - 
 
-- <u>htps://www.myscheme.gov.in/schemes/ab pmjay</u> 
+<u>htps://www.myscheme.gov.in/schemes/ab pmjay</u> 
 
-- 14. Cost of Treatment Under Ayushman Bharat PMJAY - PIB, <u>htps://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1594170</u> 
+14. Cost of Treatment Under Ayushman Bharat PMJAY - PIB, <u>htps://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1594170</u> 
 
-- 15. Ayushman Bharat Surgery & Package List 2026 (PMJAY) - Hope Hospital Nagpur, - - - - 
+15. Ayushman Bharat Surgery & Package List 2026 (PMJAY) - Hope Hospital Nagpur, - - - - 
 
-- <u>htps://www.hopehospital.com/blog/ayushman bharat surgery list 2026</u> 
+<u>htps://www.hopehospital.com/blog/ayushman bharat surgery list 2026</u> 
 

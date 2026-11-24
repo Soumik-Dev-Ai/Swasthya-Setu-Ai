@@ -1,0 +1,37 @@
+state_ut,category,known_scheme_name,pmjay_integration_status,research_status,official_portal_url,notes
+Andhra Pradesh,State,Dr. YSR Aarogyasri / Dr. NTR Vaidya Seva,Integrated with AB-PMJAY,name_identified,,Coverage up to Rs 25 lakh per search source - needs official verification
+Arunachal Pradesh,State,,Unknown,not_yet_researched,,
+Assam,State,Atal Amrit Abhiyan,Integrated with AB-PMJAY,name_identified,,
+Bihar,State,,Likely PM-JAY only - unconfirmed,not_yet_researched,,
+Chhattisgarh,State,,Unknown,not_yet_researched,,
+Goa,State,,Unknown,not_yet_researched,,
+Gujarat,State,MA Yojana (Mukhyamantri Amrutum),Unknown - needs verification,name_identified,,
+Haryana,State,Chirayu Ayushman Haryana,Integrated with AB-PMJAY,name_identified,,
+Himachal Pradesh,State,HIMCARE,Unknown - needs verification,name_identified,,Name confirmed only in passing reference - verify independently
+Jharkhand,State,,Unknown,not_yet_researched,,
+Karnataka,State,Arogya Karnataka / AB-ArK; also historical Yeshasvini,Integrated with AB-PMJAY,name_identified,,State top-up ~Rs 2 lakh beyond PMJAY per search source
+Kerala,State,Karunya Arogya Suraksha Padhathi (KASP),Integrated with AB-PMJAY,name_identified,,
+Madhya Pradesh,State,,Unknown,not_yet_researched,,
+Maharashtra,State,Mahatma Jyotiba/Jyotirao Phule Jan Arogya Yojana (MJPJAY),Unknown - needs verification,name_identified,,~2399 packages per search source - needs official confirmation
+Manipur,State,,Unknown,not_yet_researched,,
+Meghalaya,State,,Unknown,not_yet_researched,,
+Mizoram,State,,Unknown,not_yet_researched,,
+Nagaland,State,,Unknown,not_yet_researched,,
+Odisha,State,Gopabandhu Jan Arogya Yojana / Biju Swasthya Kalyan Yojana,Integrated with AB-PMJAY,name_identified,,BSKY has a separate womens-coverage component per search source
+Punjab,State,Mukh Mantri Sehat Yojana (formerly Sarbat Sehat Bima Yojana),Integrated with AB-PMJAY,name_identified,,
+Rajasthan,State,Chiranjeevi Yojana,NOT integrated - runs separately,name_identified,,Already in original 8-scheme list. Rs 25 lakh cover per prior research. No verified doc URL yet.
+Sikkim,State,,Unknown,not_yet_researched,,
+Tamil Nadu,State,Chief Ministers Comprehensive Health Insurance Scheme (CMCHIS) / Kalaignar,Unknown - needs verification,name_identified,,
+Telangana,State,Aarogyasri (Employees and Journalists Health Scheme also referenced),Unknown - needs verification,name_identified,,
+Tripura,State,,Unknown,not_yet_researched,,
+Uttar Pradesh,State,Ayushman Bharat Yojana UP,Effectively PM-JAY branded,name_identified,,
+Uttarakhand,State,Atal Ayushman Uttarakhand Yojana,Unknown - needs verification,name_identified,,
+West Bengal,State,"West Bengal Health Scheme (WBHS - govt employees) + Swasthya Sathi (all families) + AB-PMJAY (NEW: joined May 2026, benefits live July 2026)","PMJAY now active as of 2026 - MAJOR STATUS CHANGE",name_identified,,"Already in original 8-scheme list as WBHS only. West Bengal was the last holdout state before 2026 PMJAY convergence - re-verify current relationship between WBHS/Swasthya Sathi/PMJAY before using in ETL."
+Andaman and Nicobar Islands,UT,,Unknown,not_yet_researched,,
+Chandigarh,UT,,Unknown,not_yet_researched,,
+Dadra and Nagar Haveli and Daman and Diu,UT,,Unknown,not_yet_researched,,
+Delhi (NCT),UT,Delhi Arogya Kosh + PMJAY Delhi,Combined - PMJAY plus separate state fund,name_identified,,Delhi Arogya Kosh funds treatment over Rs 5 lakh per search source
+Jammu and Kashmir,UT,,Unknown,not_yet_researched,,
+Ladakh,UT,,Unknown,not_yet_researched,,
+Lakshadweep,UT,,Unknown,not_yet_researched,,
+Puducherry,UT,,Unknown,not_yet_researched,,

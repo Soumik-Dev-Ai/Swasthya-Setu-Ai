@@ -41,5 +41,6 @@ qa/results/pw-artifacts/
 qa/results/load/*.csv
 qa/results/logs/
 qa/test-results/
+docs_raw/
 
 .github/
