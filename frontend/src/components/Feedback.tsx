@@ -123,7 +123,7 @@ export function ConsentNotice({
       >
         <IconShield size={13} />
         <span className="flex-1">
-          Consent recorded â€” {dataLabel} will be sent to {destination}.
+          Consent recorded — {dataLabel} will be sent to {destination}.
        </span>
         {onRevoke && (
           <button
@@ -162,7 +162,7 @@ export function ConsentNotice({
         className="mt-2.5 inline-flex items-center gap-1.5 rounded-[4px] border border-amber/40 bg-amber/[0.08] px-3 py-1.5 text-[11px] font-semibold text-amber hover:bg-amber/[0.15] transition-colors"
       >
         <IconShield size={12} />
-        I consent â€” continue with analysis
+        I consent — continue with analysis
      </button>
    </motion.div>
   );
@@ -195,11 +195,11 @@ export function PriceBadge({
     return (
       <span
         className={`inline-flex items-center gap-1.5 rounded-[4px] border border-cyanx/40 bg-cyanx/[0.08] px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-cyanx ${className}`}
-        title={`Verified against official curated dataset. ${amount ? `â‚¹${amount.toLocaleString("en-IN")}` : ""}`}
+        title={`Verified against official curated dataset. ${amount ? `₹${amount.toLocaleString("en-IN")}` : ""}`}
       >
         <IconShield size={10} />
         Verified price
-        {amount != null ? ` Â· â‚¹${amount.toLocaleString("en-IN")}` : ""}
+        {amount != null ? ` · ₹${amount.toLocaleString("en-IN")}` : ""}
      </span>
     );
   }
@@ -207,10 +207,10 @@ export function PriceBadge({
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-[4px] border border-amber/30 bg-amber/[0.06] px-2 py-0.5 text-[10.5px] uppercase tracking-[0.12em] text-amber ${className}`}
-      title="Community-sourced estimate â€” not verified against official pricing"
+      title="Community-sourced estimate — not verified against official pricing"
     >
-      Community estimate â€” not officially verified
-      {amount != null ? ` Â· ~â‚¹${amount.toLocaleString("en-IN")}` : ""}
+      Community estimate — not officially verified
+      {amount != null ? ` · ~₹${amount.toLocaleString("en-IN")}` : ""}
    </span>
   );
 }

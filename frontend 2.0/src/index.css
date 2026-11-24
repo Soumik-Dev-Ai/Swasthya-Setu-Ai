@@ -1,0 +1,250 @@
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource/noto-sans-devanagari/400.css";
+@import "@fontsource/noto-sans-devanagari/600.css";
+@import "@fontsource/noto-sans-bengali/400.css";
+@import "@fontsource/noto-sans-bengali/600.css";
+@import "@fontsource/noto-sans-telugu/400.css";
+@import "@fontsource/noto-sans-telugu/600.css";
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* LIGHT MODE — warm cream canvas, never white */
+  --bg: oklch(0.97 0.008 80);
+  --bg-surface: oklch(0.99 0.004 80);
+  --bg-elevated: oklch(1 0 0);
+  --fg: oklch(0.15 0.02 60);
+  --fg-muted: oklch(0.45 0.02 60);
+  --fg-subtle: oklch(0.65 0.01 60);
+
+  /* FEATURE ACCENTS — each module owns a colour */
+  --coral: oklch(0.68 0.17 25);
+  --coral-soft: oklch(0.93 0.05 25);
+  --mint: oklch(0.66 0.12 165);
+  --mint-soft: oklch(0.94 0.045 165);
+  --lavender: oklch(0.62 0.11 300);
+  --lavender-soft: oklch(0.94 0.04 300);
+  --amber: oklch(0.70 0.15 80);
+  --amber-soft: oklch(0.95 0.05 80);
+  --sky: oklch(0.60 0.11 230);
+  --sky-soft: oklch(0.94 0.04 230);
+
+  /* URGENCY */
+  --safe: oklch(0.70 0.15 155);
+  --caution: oklch(0.75 0.14 85);
+  --urgent: oklch(0.66 0.17 50);
+  --emergency: oklch(0.62 0.22 25);
+
+  --border: oklch(0.90 0.01 80);
+  --ring: var(--coral);
+
+  /* 3D scene hex fallbacks (for three.js) */
+  --c3d-coral: #ee7b5c;
+  --c3d-mint: #6fd1a8;
+  --c3d-lavender: #b394e0;
+  --c3d-amber: #f0b53f;
+  --c3d-sky: #7db2ec;
+}
+
+.dark {
+  --bg: oklch(0.14 0.01 60); /* warm charcoal — NOT navy */
+  --bg-surface: oklch(0.18 0.01 60);
+  --bg-elevated: oklch(0.22 0.01 60);
+  --fg: oklch(0.93 0.005 80);
+  --fg-muted: oklch(0.62 0.01 60);
+  --fg-subtle: oklch(0.42 0.01 60);
+
+  --coral: oklch(0.75 0.16 25);
+  --coral-soft: oklch(0.24 0.05 25);
+  --mint: oklch(0.80 0.12 165);
+  --mint-soft: oklch(0.24 0.04 165);
+  --lavender: oklch(0.75 0.10 300);
+  --lavender-soft: oklch(0.26 0.05 300);
+  --amber: oklch(0.80 0.14 80);
+  --amber-soft: oklch(0.26 0.05 80);
+  --sky: oklch(0.78 0.10 230);
+  --sky-soft: oklch(0.24 0.04 230);
+
+  --safe: oklch(0.78 0.15 155);
+  --caution: oklch(0.80 0.14 85);
+  --urgent: oklch(0.70 0.17 50);
+  --emergency: oklch(0.65 0.22 25);
+
+  --border: oklch(0.26 0.01 60);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-mint: var(--mint);
+  --color-mint-soft: var(--mint-soft);
+  --color-lavender: var(--lavender);
+  --color-lavender-soft: var(--lavender-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
+  --color-safe: var(--safe);
+  --color-caution: var(--caution);
+  --color-urgent: var(--urgent);
+  --color-emergency: var(--emergency);
+  --color-line: var(--border);
+
+  --font-display: "Space Grotesk Variable", "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --radius-sm: 0.5rem;
+  --radius: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+}
+
+/* Phase-6 item 6D — Indic script webfonts, bundled (offline-first) rather
+ * than a Google Fonts CDN link (a runtime network dependency the
+ * offline-first build must never have). Font fallback is per-glyph, so the
+ * display font keeps Latin/digits while Indic glyphs resolve to Noto —
+ * the design language survives and the script renders correctly.
+ * Locale is set on <html> by bindDocumentEffects(). */
+[lang="hi"],
+[lang="mr"] {
+  --font-sans: "Noto Sans Devanagari", "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Space Grotesk", "Noto Sans Devanagari", ui-sans-serif, sans-serif;
+}
+[lang="bn"] {
+  --font-sans: "Noto Sans Bengali", "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Space Grotesk", "Noto Sans Bengali", ui-sans-serif, sans-serif;
+}
+[lang="te"] {
+  --font-sans: "Noto Sans Telugu", "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Space Grotesk", "Noto Sans Telugu", ui-sans-serif, sans-serif;
+}
+
+/* ---------- base ---------- */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01" on;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--coral); color: #fff; }
+h1, h2, h3, h4 { font-family: var(--font-display); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: color-mix(in oklab, var(--fg-subtle) 40%, transparent); border-radius: 99px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- utilities ---------- */
+.glass {
+  background: color-mix(in oklab, var(--bg-surface) 66%, transparent);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid color-mix(in oklab, var(--coral) 18%, transparent);
+}
+.input-line {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--border);
+  padding: 0.6rem 0.1rem;
+  color: var(--fg);
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.input-line:focus { outline: none; border-color: var(--accent, var(--coral)); }
+.input-line::placeholder { color: var(--fg-subtle); }
+
+.wash-coral { background: linear-gradient(180deg, var(--coral-soft) 0%, var(--bg) 340px); }
+.wash-amber { background: linear-gradient(180deg, var(--amber-soft) 0%, var(--bg) 340px); }
+.wash-mint { background: linear-gradient(180deg, var(--mint-soft) 0%, var(--bg) 340px); }
+.wash-sky { background: linear-gradient(180deg, var(--sky-soft) 0%, var(--bg) 340px); }
+.wash-lavender { background: linear-gradient(180deg, var(--lavender-soft) 0%, var(--bg) 340px); }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+.text-balance { text-wrap: balance; }
+
+/* ---------- leaflet ---------- */
+.leaflet-container {
+  background: var(--bg-surface) !important;
+  font-family: var(--font-sans) !important;
+}
+.dark .leaflet-tile {
+  filter: brightness(0.65) contrast(1.1) sepia(0.18) hue-rotate(-8deg) saturate(0.75);
+}
+.leaflet-div-icon { background: transparent; border: none; }
+.lpin {
+  width: 20px; height: 20px;
+  border-radius: 999px;
+  background: var(--pin, var(--mint));
+  border: 3px solid #fff;
+  box-shadow: 0 3px 10px oklch(0 0 0 / 0.35);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.lpin.sel { transform: scale(1.5); animation: pin-pulse 1.8s ease-in-out infinite; }
+@keyframes pin-pulse {
+  0%, 100% { box-shadow: 0 3px 10px oklch(0 0 0 / 0.35), 0 0 0 0 color-mix(in oklab, var(--pin, var(--mint)) 55%, transparent); }
+  50% { box-shadow: 0 3px 10px oklch(0 0 0 / 0.35), 0 0 0 12px transparent; }
+}
+
+/* ---------- keyframes ---------- */
+@keyframes blob-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -50px) scale(1.15); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
+}
+@keyframes blob-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-50px, 40px) scale(1.1); }
+  70% { transform: translate(30px, -40px) scale(0.92); }
+}
+@keyframes blob-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 60px) scale(1.2); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 36s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes soft-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+@keyframes lang-glow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--coral) 35%, transparent); }
+  50% { box-shadow: 0 0 0 12px transparent; }
+}
+
+/* ---------- responsive & device hardening ---------- */
+@media (max-height: 520px) {
+  .scroll-ind { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+img, svg, canvas { max-width: 100%; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }

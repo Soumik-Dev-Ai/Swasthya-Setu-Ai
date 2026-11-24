@@ -1,5 +1,5 @@
-﻿/**
- * Swasthya Setu Ai â€” deterministic research data layer.
+/**
+ * Swasthya Setu Ai — deterministic research data layer.
  * Everything the "offline engine" computes from lives here.
  */
 
@@ -130,7 +130,7 @@ export const PROVIDERS: Provider[] = [
 
 export const providerById = (id: string): Provider => PROVIDERS.find((p) => p.id === id) ?? PROVIDERS[1];
 
-/* ---------------- disease cost benchmarks (Delhi base, mildâ†’critical) ---------------- */
+/* ---------------- disease cost benchmarks (Delhi base, mild→critical) ---------------- */
 
 export interface Disease {
   id: string;
@@ -170,7 +170,7 @@ export interface RedFlag {
 export const RED_FLAGS: RedFlag[] = [
   { id: "chest", labelKey: "Chest pain or crushing pressure", hintKey: "Pain spreading to arm, jaw or back" },
   { id: "breath", labelKey: "Severe breathlessness at rest", hintKey: "Cannot finish a sentence in one breath" },
-  { id: "stroke", labelKey: "Face droop / arm weakness / slurred speech", hintKey: "Sudden onset â€” FAST signs" },
+  { id: "stroke", labelKey: "Face droop / arm weakness / slurred speech", hintKey: "Sudden onset — FAST signs" },
   { id: "blood", labelKey: "Coughing or vomiting blood", hintKey: "Any quantity, fresh blood" },
   { id: "collapse", labelKey: "Fainting or unresponsiveness", hintKey: "Loss of consciousness this week" },
   { id: "preg", labelKey: "Pregnancy with bleeding or seizures", hintKey: "Any trimester" },
@@ -189,23 +189,23 @@ export interface Condition {
 }
 
 export const CONDITIONS: Condition[] = [
-  { id: "dengue", nameKey: "Dengue fever", level: 3, keywords: ["fever", "joint pain", "body ache", "pain behind eyes", "rash", "platelet", "bone pain", "à¤œà¥‹à¤¡à¤¼", "à¤œà¥‹à¤¡à¤¼à¥‹à¤‚", "à¤¬à¥à¤–à¤¾à¤°", "à¦šà§‹à¦–", "à¦œà§à¦¬à¦°", "à¦—à¦¾ à¦¬à§à¦¯à¦¥à¦¾"], adviceKey: "Push fluids aggressively. Daily platelet monitoring for the next 5 days; hospitalise if bleeding signs or dizziness appear." },
-  { id: "typhoid", nameKey: "Typhoid fever", level: 3, keywords: ["fever", "weakness", "stomach pain", "abdominal", "constipation", "vomiting", "à¤Ÿà¤¾à¤‡à¤«à¤¾à¤‡à¤¡", "à¦ªà§‡à¦Ÿà§‡ à¦¬à§à¦¯à¦¥à¦¾", "à¤œà¥€ à¤®à¤¿à¤šà¤²à¤¾à¤¨à¤¾"], adviceKey: "Blood culture is the gold-standard test. Antibiotics only as prescribed; hydration is critical through week 2." },
-  { id: "covid", nameKey: "COVID-19 / viral illness", level: 2, keywords: ["fever", "cough", "sore throat", "cold", "taste", "smell", "runny nose", "à¤¸à¤°à¥à¤¦à¥€", "à¤—à¤²à¥‡", "à¦•à¦¾à¦¶à¦¿", "à¦—à¦²à¦¾ à¦¬à§à¦¯à¦¥à¦¾"], adviceKey: "Test on day 2-3 of fever. Isolate and monitor oxygen saturation with a pulse oximeter twice daily." },
-  { id: "pneumonia", nameKey: "Pneumonia", level: 4, keywords: ["cough", "chest", "sputum", "rapid breathing", "grunting", "à¤¨à¤¿à¤®à¥‹à¤¨à¤¿à¤¯à¤¾", "à¦¨à¦¿à¦‰à¦®à§‹à¦¨à¦¿à¦¯à¦¼à¦¾", "à¤¸à¤¾à¤à¤¸"], adviceKey: "Any child with rapid breathing or chest indrawing needs same-day assessment. Adults: watch for oxygen saturation below 92%." },
-  { id: "flu", nameKey: "Influenza", level: 2, keywords: ["fever", "chills", "body ache", "muscle pain", "headache", "à¤«à¥à¤²à¥‚", "à¦‡à¦¨à¦«à§à¦²à§à¦¯à¦¼à§‡à¦žà§à¦œà¦¾"], adviceKey: "Symptomatic care: paracetamol, fluids, rest. Antivirals help only if started in the first 48 hours." },
-  { id: "gastro", nameKey: "Acute gastroenteritis", level: 2, keywords: ["diarrhoea", "diarrhea", "loose", "stool", "vomiting", "stomach", "à¤¦à¤¸à¥à¤¤", "à¤‰à¤²à¥à¤Ÿà¥€", "à¦ªà¦¾à¦¯à¦¼à¦–à¦¾à¦¨à¦¾", "à¦¬à¦®à¦¿"], adviceKey: "ORS after every loose stool. Danger signs: sunken eyes, no urine for 8 hours, blood in stool â€” then hospitalise." },
-  { id: "migraine", nameKey: "Migraine / tension headache", level: 1, keywords: ["headache", "migraine", "sir dard", "à¤¸à¤¿à¤°à¤¦à¤°à¥à¤¦", "à¤®à¤¾à¤¥à¤¾", "à¦®à¦¾à¦¥à¦¾à¦¬à§à¦¯à¦¥à¦¾"], adviceKey: "Rest in a dark quiet room. Persistent daily headaches for 2+ weeks need an eye and BP check first." },
-  { id: "uti", nameKey: "Urinary tract infection", level: 2, keywords: ["burning", "urine", "urination", "bladder", "à¤ªà¥‡à¤¶à¤¾à¤¬", "à¤®à¥‚à¤¤à¥à¤°", "à¦ªà§à¦°à¦¸à§à¦°à¦¾à¦¬"], adviceKey: "High fluid intake helps early. Fever with flank pain may mean kidney involvement â€” needs same-day care." },
-  { id: "asthma", nameKey: "Asthma exacerbation", level: 4, keywords: ["wheeze", "wheezing", "asthma", "inhaler", "à¤¸à¤¾à¤à¤¸", "à¤¦à¤®à¤¾", "à¦¹à¦¾à¦à¦ªà¦¾à¦¨à¦¿"], adviceKey: "Use the reliever inhaler immediately. If relief lasts under 4 hours, or oxygen saturation drops below 90%, seek urgent care." },
-  { id: "dengue-sev", nameKey: "Severe dengue warning", level: 4, keywords: ["bleeding", "gums", "bruising", "blood", "platelet", "à¤°à¤•à¥à¤¤", "à¦°à¦•à§à¦¤à¦•à§à¦·à¦°à¦£"], adviceKey: "Any mucosal bleeding or abdominal pain with fever requires hospitalisation within hours for platelet and haematocrit monitoring." },
-  { id: "cardiac", nameKey: "Cardiac chest pain", level: 4, keywords: ["chest pain", "left arm", "sweating", "palpitation", "à¤¸à¥€à¤¨à¥‡ à¤®à¥‡à¤‚ à¤¦à¤°à¥à¤¦", "à¦¬à§à¦•à§‡à¦° à¦¬à§à¦¯à¦¥à¦¾"], adviceKey: "Aspirin 325 mg chewed (if not allergic) and rush to an emergency facility with cath-lab capability. Do not drive yourself." },
-  { id: "stomach", nameKey: "Gastritis / acid reflux", level: 1, keywords: ["acidity", "gas", "burp", "heartburn", "à¤à¤¸à¤¿à¤¡à¤¿à¤Ÿà¥€", "à¤—à¥ˆà¤¸", "à¦…à§à¦¯à¦¾à¦¸à¦¿à¦¡à¦¿à¦Ÿà¦¿", "à¦—à§à¦¯à¦¾à¦¸"], adviceKey: "Small frequent meals, avoid late-night eating. If pain radiates to the chest or arm, treat as cardiac until proven otherwise." },
-  { id: "backpain", nameKey: "Musculoskeletal back pain", level: 1, keywords: ["back pain", "backache", "waist", "à¤•à¤®à¤°", "à¤ªà¥€à¤ ", "à¦•à§‹à¦®à¦°", "à¦ªà¦¿à¦ "], adviceKey: "Stay mobile, avoid prolonged bed rest. Red flags: numbness in legs, loss of bowel control â€” needs urgent review." },
-  { id: "anemia", nameKey: "Anaemia", level: 2, keywords: ["weakness", "tired", "fatigue", "pale", "dizzy", "à¤•à¤®à¤œà¤¼à¥‹à¤°à¥€", "à¤¦à¥à¤°à¥à¤¬à¤²à¤¤à¤¾", "à¦¦à§à¦°à§à¦¬à¦²à¦¤à¦¾"], adviceKey: "A haemoglobin test is the first step. Dietary iron and folic acid help while awaiting results." },
-  { id: "diabetes", nameKey: "Uncontrolled diabetes", level: 3, keywords: ["sugar", "diabetes", "thirst", "frequent urination", "à¤®à¤§à¥à¤®à¥‡à¤¹", "à¤¶à¥à¤—à¤°", "à¦¡à¦¾à¦¯à¦¼à¦¾à¦¬à§‡à¦Ÿà¦¿à¦¸"], adviceKey: "If blood glucose stays above 250 mg/dL or ketones appear, seek same-day care. Skip sugary drinks entirely." },
-  { id: "skin", nameKey: "Skin infection / rash", level: 1, keywords: ["rash", "itching", "skin", "boil", "à¤–à¥à¤œà¤²à¥€", "à¤¤à¥à¤µà¤šà¤¾", "à¦šà§à¦²à¦•à¦¾à¦¨à¦¿", "à¦¤à§à¦¬à¦•"], adviceKey: "Clean with soap and water; avoid scratching. A spreading red streak or fever with rash means same-day care." },
-  { id: "eye", nameKey: "Eye infection (conjunctivitis)", level: 1, keywords: ["red eye", "eye pain", "itching", "eye discharge", "à¤†à¤à¤–", "à¦šà§‹à¦–"], adviceKey: "Frequent handwashing; avoid touching eyes. Severe eye pain or vision loss is an emergency, not a routine visit." },
+  { id: "dengue", nameKey: "Dengue fever", level: 3, keywords: ["fever", "joint pain", "body ache", "pain behind eyes", "rash", "platelet", "bone pain", "जोड़", "जोड़ों", "बुखार", "চোখ", "জ্বর", "গা ব্যথা"], adviceKey: "Push fluids aggressively. Daily platelet monitoring for the next 5 days; hospitalise if bleeding signs or dizziness appear." },
+  { id: "typhoid", nameKey: "Typhoid fever", level: 3, keywords: ["fever", "weakness", "stomach pain", "abdominal", "constipation", "vomiting", "टाइफाइड", "পেটে ব্যথা", "जी मिचलाना"], adviceKey: "Blood culture is the gold-standard test. Antibiotics only as prescribed; hydration is critical through week 2." },
+  { id: "covid", nameKey: "COVID-19 / viral illness", level: 2, keywords: ["fever", "cough", "sore throat", "cold", "taste", "smell", "runny nose", "सर्दी", "गले", "কাশি", "গলা ব্যথা"], adviceKey: "Test on day 2-3 of fever. Isolate and monitor oxygen saturation with a pulse oximeter twice daily." },
+  { id: "pneumonia", nameKey: "Pneumonia", level: 4, keywords: ["cough", "chest", "sputum", "rapid breathing", "grunting", "निमोनिया", "নিউমোনিয়া", "साँस"], adviceKey: "Any child with rapid breathing or chest indrawing needs same-day assessment. Adults: watch for oxygen saturation below 92%." },
+  { id: "flu", nameKey: "Influenza", level: 2, keywords: ["fever", "chills", "body ache", "muscle pain", "headache", "फ्लू", "ইনফ্লুয়েঞ্জা"], adviceKey: "Symptomatic care: paracetamol, fluids, rest. Antivirals help only if started in the first 48 hours." },
+  { id: "gastro", nameKey: "Acute gastroenteritis", level: 2, keywords: ["diarrhoea", "diarrhea", "loose", "stool", "vomiting", "stomach", "दस्त", "उल्टी", "পায়খানা", "বমি"], adviceKey: "ORS after every loose stool. Danger signs: sunken eyes, no urine for 8 hours, blood in stool — then hospitalise." },
+  { id: "migraine", nameKey: "Migraine / tension headache", level: 1, keywords: ["headache", "migraine", "sir dard", "सिरदर्द", "माथा", "মাথাব্যথা"], adviceKey: "Rest in a dark quiet room. Persistent daily headaches for 2+ weeks need an eye and BP check first." },
+  { id: "uti", nameKey: "Urinary tract infection", level: 2, keywords: ["burning", "urine", "urination", "bladder", "पेशाब", "मूत्र", "প্রস্রাব"], adviceKey: "High fluid intake helps early. Fever with flank pain may mean kidney involvement — needs same-day care." },
+  { id: "asthma", nameKey: "Asthma exacerbation", level: 4, keywords: ["wheeze", "wheezing", "asthma", "inhaler", "साँस", "दमा", "হাঁপানি"], adviceKey: "Use the reliever inhaler immediately. If relief lasts under 4 hours, or oxygen saturation drops below 90%, seek urgent care." },
+  { id: "dengue-sev", nameKey: "Severe dengue warning", level: 4, keywords: ["bleeding", "gums", "bruising", "blood", "platelet", "रक्त", "রক্তক্ষরণ"], adviceKey: "Any mucosal bleeding or abdominal pain with fever requires hospitalisation within hours for platelet and haematocrit monitoring." },
+  { id: "cardiac", nameKey: "Cardiac chest pain", level: 4, keywords: ["chest pain", "left arm", "sweating", "palpitation", "सीने में दर्द", "বুকের ব্যথা"], adviceKey: "Aspirin 325 mg chewed (if not allergic) and rush to an emergency facility with cath-lab capability. Do not drive yourself." },
+  { id: "stomach", nameKey: "Gastritis / acid reflux", level: 1, keywords: ["acidity", "gas", "burp", "heartburn", "एसिडिटी", "गैस", "অ্যাসিডিটি", "গ্যাস"], adviceKey: "Small frequent meals, avoid late-night eating. If pain radiates to the chest or arm, treat as cardiac until proven otherwise." },
+  { id: "backpain", nameKey: "Musculoskeletal back pain", level: 1, keywords: ["back pain", "backache", "waist", "कमर", "पीठ", "কোমর", "পিঠ"], adviceKey: "Stay mobile, avoid prolonged bed rest. Red flags: numbness in legs, loss of bowel control — needs urgent review." },
+  { id: "anemia", nameKey: "Anaemia", level: 2, keywords: ["weakness", "tired", "fatigue", "pale", "dizzy", "कमज़ोरी", "दुर्बलता", "দুর্বলতা"], adviceKey: "A haemoglobin test is the first step. Dietary iron and folic acid help while awaiting results." },
+  { id: "diabetes", nameKey: "Uncontrolled diabetes", level: 3, keywords: ["sugar", "diabetes", "thirst", "frequent urination", "मधुमेह", "शुगर", "ডায়াবেটিস"], adviceKey: "If blood glucose stays above 250 mg/dL or ketones appear, seek same-day care. Skip sugary drinks entirely." },
+  { id: "skin", nameKey: "Skin infection / rash", level: 1, keywords: ["rash", "itching", "skin", "boil", "खुजली", "त्वचा", "চুলকানি", "ত্বক"], adviceKey: "Clean with soap and water; avoid scratching. A spreading red streak or fever with rash means same-day care." },
+  { id: "eye", nameKey: "Eye infection (conjunctivitis)", level: 1, keywords: ["red eye", "eye pain", "itching", "eye discharge", "आँख", "চোখ"], adviceKey: "Frequent handwashing; avoid touching eyes. Severe eye pain or vision loss is an emergency, not a routine visit." },
 ];
 
 /* ---------------- ASHA worker directory (deterministic sample) ---------------- */
@@ -257,7 +257,7 @@ export const SCHEMES: Scheme[] = [
     name: "Ayushman Bharat PM-JAY",
     short: "PM-JAY",
     type: "National",
-    benefit: "â‚¹5 lakh family floater per year, cashless at empanelled hospitals. All pre-existing diseases covered from day one.",
+    benefit: "₹5 lakh family floater per year, cashless at empanelled hospitals. All pre-existing diseases covered from day one.",
     docs: "PM-JAY golden card (SECC-linked), Aadhaar, ration card.",
     match: (p) => {
       let s = 0;
@@ -285,7 +285,7 @@ export const SCHEMES: Scheme[] = [
     name: "Employees' State Insurance Scheme",
     short: "ESIC",
     type: "National",
-    benefit: "Complete medical care plus 70% wage compensation during sick leave for workers earning under â‚¹21,000/month.",
+    benefit: "Complete medical care plus 70% wage compensation during sick leave for workers earning under ₹21,000/month.",
     docs: "ESIC pehchan card, employer contribution record.",
     match: (p) => (p.work === "work.pvt" ? 90 : p.work === "work.daily" ? 22 : 6),
   },
@@ -317,7 +317,7 @@ export const SCHEMES: Scheme[] = [
     name: "Health Minister's Discretionary Grant",
     short: "HMDG",
     type: "National",
-    benefit: "One-time financial assistance (up to â‚¹1.25 lakh) for critical illness treatment for families below poverty line.",
+    benefit: "One-time financial assistance (up to ₹1.25 lakh) for critical illness treatment for families below poverty line.",
     docs: "BPL certificate, critical-illness diagnosis, estimated treatment quote.",
     require: "need",
     match: (p) => (p.need === "need.critical" && p.income === 0 ? 86 : p.need === "need.critical" && p.income === 1 ? 54 : 0),
@@ -327,7 +327,7 @@ export const SCHEMES: Scheme[] = [
     name: "Chiranjeevi Swasthya Bima Yojana",
     short: "CSBY",
     type: "State",
-    benefit: "â‚¹25 lakh family floater cashless cover for all Rajasthan families, at empanelled public and private hospitals.",
+    benefit: "₹25 lakh family floater cashless cover for all Rajasthan families, at empanelled public and private hospitals.",
     docs: "Aadhaar-linked family registration on the state portal.",
     require: "state",
     match: (p) => (p.state === "RJ" ? (p.income <= 2 ? 91 : 68) : 0),
@@ -388,27 +388,27 @@ export function diseaseForCondition(conditionId: string): string {
 
 /** multilingual condition display names for the ASHA emergency board */
 export const CONDITION_NAMES: Record<string, { en: string; hi: string; bn: string }> = {
-  dengue: { en: "Dengue fever", hi: "à¤¡à¥‡à¤‚à¤—à¥‚ à¤¬à¥à¤–à¤¾à¤°", bn: "à¦¡à§‡à¦™à§à¦—à§ à¦œà§à¦¬à¦°" },
-  typhoid: { en: "Typhoid fever", hi: "à¤Ÿà¤¾à¤‡à¤«à¤¾à¤‡à¤¡ à¤¬à¥à¤–à¤¾à¤°", bn: "à¦Ÿà¦¾à¦‡à¦«à¦¯à¦¼à§‡à¦¡ à¦œà§à¦¬à¦°" },
-  covid: { en: "COVID-19 / viral illness", hi: "à¤•à¥‹à¤µà¤¿à¤¡-19 / à¤µà¤¾à¤¯à¤°à¤² à¤¬à¥€à¤®à¤¾à¤°à¥€", bn: "à¦•à§‹à¦­à¦¿à¦¡-à§§à§¯ / à¦­à¦¾à¦‡à¦°à¦¾à¦² à¦…à¦¸à§à¦–" },
-  pneumonia: { en: "Pneumonia", hi: "à¤¨à¤¿à¤®à¥‹à¤¨à¤¿à¤¯à¤¾", bn: "à¦¨à¦¿à¦‰à¦®à§‹à¦¨à¦¿à¦¯à¦¼à¦¾" },
-  flu: { en: "Influenza", hi: "à¤‡à¤¨à¥à¤«à¥à¤²à¥‚à¤à¤‚à¤œà¤¼à¤¾", bn: "à¦‡à¦¨à¦«à§à¦²à§à¦¯à¦¼à§‡à¦žà§à¦œà¦¾" },
-  gastro: { en: "Acute gastroenteritis", hi: "à¤¤à¥€à¤µà¥à¤° à¤†à¤‚à¤¤à¥à¤°à¤¶à¥‹à¤¥", bn: "à¦¤à§€à¦¬à§à¦° à¦—à§à¦¯à¦¾à¦¸à§à¦Ÿà§à¦°à§‹à¦à¦¨à§à¦Ÿà§‡à¦°à¦¾à¦‡à¦Ÿà¦¿à¦¸" },
-  migraine: { en: "Migraine / tension headache", hi: "à¤®à¤¾à¤‡à¤—à¥à¤°à¥‡à¤¨ / à¤¤à¤¨à¤¾à¤µ à¤¸à¤¿à¤°à¤¦à¤°à¥à¤¦", bn: "à¦®à¦¾à¦‡à¦—à§à¦°à§‡à¦¨ / à¦šà¦¾à¦ª à¦®à¦¾à¦¥à¦¾à¦¬à§à¦¯à¦¥à¦¾" },
-  uti: { en: "Urinary tract infection", hi: "à¤®à¥‚à¤¤à¥à¤° à¤®à¤¾à¤°à¥à¤— à¤¸à¤‚à¤•à¥à¤°à¤®à¤£", bn: "à¦®à§‚à¦¤à§à¦°à¦¨à¦¾à¦²à§€à¦° à¦¸à¦‚à¦•à§à¦°à¦®à¦£" },
-  asthma: { en: "Asthma exacerbation", hi: "à¤¦à¤®à¤¾ à¤•à¤¾ à¤¦à¥Œà¤°à¤¾", bn: "à¦¹à¦¾à¦à¦ªà¦¾à¦¨à¦¿à¦° à¦¤à§€à¦¬à§à¦°à¦¤à¦¾" },
-  "dengue-sev": { en: "Severe dengue warning", hi: "à¤—à¤‚à¤­à¥€à¤° à¤¡à¥‡à¤‚à¤—à¥‚ à¤šà¥‡à¤¤à¤¾à¤µà¤¨à¥€", bn: "à¦—à§à¦°à§à¦¤à¦° à¦¡à§‡à¦™à§à¦—à§ à¦¸à¦¤à¦°à§à¦•à¦¤à¦¾" },
-  cardiac: { en: "Cardiac chest pain", hi: "à¤¹à¥ƒà¤¦à¤¯ à¤¸à¥€à¤¨à¥‡ à¤®à¥‡à¤‚ à¤¦à¤°à¥à¤¦", bn: "à¦¹à§ƒà¦¦à¦¯à¦¨à§à¦¤à§à¦°à§‡à¦° à¦¬à§à¦•à§‡ à¦¬à§à¦¯à¦¥à¦¾" },
-  stomach: { en: "Gastritis / acid reflux", hi: "à¤—à¥ˆà¤¸à¥à¤Ÿà¥à¤°à¤¾à¤‡à¤Ÿà¤¿à¤¸ / à¤…à¤®à¥à¤²à¤¤à¤¾", bn: "à¦—à§à¦¯à¦¾à¦¸à§à¦Ÿà§à¦°à¦¾à¦‡à¦Ÿà¦¿à¦¸ / à¦…à¦®à§à¦¬à¦²" },
-  backpain: { en: "Musculoskeletal back pain", hi: "à¤•à¤®à¤° / à¤ªà¥€à¤  à¤¦à¤°à¥à¤¦", bn: "à¦•à§‹à¦®à¦° / à¦ªà¦¿à¦ à§‡ à¦¬à§à¦¯à¦¥à¦¾" },
-  anemia: { en: "Anaemia", hi: "à¤–à¥‚à¤¨ à¤•à¥€ à¤•à¤®à¥€", bn: "à¦°à¦•à§à¦¤à¦¾à¦²à§à¦ªà¦¤à¦¾" },
-  diabetes: { en: "Uncontrolled diabetes", hi: "à¤…à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤¿à¤¤ à¤®à¤§à¥à¤®à¥‡à¤¹", bn: "à¦…à¦¨à¦¿à¦¯à¦¼à¦¨à§à¦¤à§à¦°à¦¿à¦¤ à¦¡à¦¾à¦¯à¦¼à¦¾à¦¬à§‡à¦Ÿà¦¿à¦¸" },
-  skin: { en: "Skin infection / rash", hi: "à¤¤à¥à¤µà¤šà¤¾ à¤¸à¤‚à¤•à¥à¤°à¤®à¤£ / à¤šà¤•à¤¤à¥à¤¤à¥‡", bn: "à¦¤à§à¦¬à¦•à§‡à¦° à¦¸à¦‚à¦•à§à¦°à¦®à¦£ / à¦°â€à§à¦¯à¦¾à¦¶" },
-  eye: { en: "Eye infection (conjunctivitis)", hi: "à¤†à¤à¤– à¤¸à¤‚à¤•à¥à¤°à¤®à¤£ (à¤†à¤à¤– à¤†à¤¨à¤¾)", bn: "à¦šà§‹à¦–à§‡à¦° à¦¸à¦‚à¦•à§à¦°à¦®à¦£ (à¦•à¦¨à¦œà¦¾à¦‚à¦Ÿà¦¿à¦­à¦¾à¦‡à¦Ÿà¦¿à¦¸)" },
+  dengue: { en: "Dengue fever", hi: "डेंगू बुखार", bn: "ডেঙ্গু জ্বর" },
+  typhoid: { en: "Typhoid fever", hi: "टाइफाइड बुखार", bn: "টাইফয়েড জ্বর" },
+  covid: { en: "COVID-19 / viral illness", hi: "कोविड-19 / वायरल बीमारी", bn: "কোভিড-১৯ / ভাইরাল অসুখ" },
+  pneumonia: { en: "Pneumonia", hi: "निमोनिया", bn: "নিউমোনিয়া" },
+  flu: { en: "Influenza", hi: "इन्फ्लूएंज़ा", bn: "ইনফ্লুয়েঞ্জা" },
+  gastro: { en: "Acute gastroenteritis", hi: "तीव्र आंत्रशोथ", bn: "তীব্র গ্যাস্ট্রোএন্টেরাইটিস" },
+  migraine: { en: "Migraine / tension headache", hi: "माइग्रेन / तनाव सिरदर्द", bn: "মাইগ্রেন / চাপ মাথাব্যথা" },
+  uti: { en: "Urinary tract infection", hi: "मूत्र मार्ग संक्रमण", bn: "মূত্রনালীর সংক্রমণ" },
+  asthma: { en: "Asthma exacerbation", hi: "दमा का दौरा", bn: "হাঁপানির তীব্রতা" },
+  "dengue-sev": { en: "Severe dengue warning", hi: "गंभीर डेंगू चेतावनी", bn: "গুরুতর ডেঙ্গু সতর্কতা" },
+  cardiac: { en: "Cardiac chest pain", hi: "हृदय सीने में दर्द", bn: "হৃদযন্ত্রের বুকে ব্যথা" },
+  stomach: { en: "Gastritis / acid reflux", hi: "गैस्ट्राइटिस / अम्लता", bn: "গ্যাস্ট্রাইটিস / অম্বল" },
+  backpain: { en: "Musculoskeletal back pain", hi: "कमर / पीठ दर्द", bn: "কোমর / পিঠে ব্যথা" },
+  anemia: { en: "Anaemia", hi: "खून की कमी", bn: "রক্তাল্পতা" },
+  diabetes: { en: "Uncontrolled diabetes", hi: "अनियंत्रित मधुमेह", bn: "অনিয়ন্ত্রিত ডায়াবেটিস" },
+  skin: { en: "Skin infection / rash", hi: "त्वचा संक्रमण / चकत्ते", bn: "ত্বকের সংক্রমণ / র‍্যাশ" },
+  eye: { en: "Eye infection (conjunctivitis)", hi: "आँख संक्रमण (आँख आना)", bn: "চোখের সংক্রমণ (কনজাংটিভাইটিস)" },
 };
 
 export const inr = (n: number) =>
-  "â‚¹" + Math.round(n).toLocaleString("en-IN");
+  "₹" + Math.round(n).toLocaleString("en-IN");
 
 
 

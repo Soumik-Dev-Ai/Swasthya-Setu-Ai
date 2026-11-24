@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f2ea" />
+    <title>SwasthyaSetu — India's Healthcare Navigation Layer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // Pre-paint theme + language (avoid flash of wrong theme)
+      try {
+        var s = JSON.parse(localStorage.getItem("ss-state") || "{}");
+        if (s.state && s.state.theme === "dark") document.documentElement.classList.add("dark");
+        if (s.state && s.state.lang === "ur") document.documentElement.setAttribute("dir", "rtl");
+      } catch (e) {}
+    </script>
+    <style>
+      html { background: oklch(0.97 0.008 80); }
+      html.dark { background: oklch(0.14 0.01 60); }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

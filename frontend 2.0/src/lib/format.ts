@@ -1,0 +1,1 @@
+export const fmtINR = (n: number) => "₹" + n.toLocaleString("en-IN");
