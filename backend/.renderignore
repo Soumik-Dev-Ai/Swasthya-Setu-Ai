@@ -1,0 +1,13 @@
+# Doc 24: model weight files must never ship to the cloud deployment.
+# The edge (ONNX) model loads only on local dev machines and the mobile
+# app's on-device bundle — Render's backend must never contain these.
+**/*.onnx
+**/*.safetensors
+**/*.pt
+**/*.pth
+**/*.bin
+**/*.gguf
+**/*.tflite
+**/.ipynb_checkpoints/
+models/
+checkpoints/

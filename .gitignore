@@ -11,7 +11,17 @@ __pycache__/
 .venv/
 venv/
 env/
+.pytest_cache/
+
+# Environment & Secrets
 .env
+.env.*
+!.env.example
+*.env
+backend/.env*
+!backend/.env.example
+qa/.env*
+!qa/.env.example
 
 # Database
 *.db
@@ -21,3 +31,15 @@ env/
 .DS_Store
 Thumbs.db
 ai model/SwasthyaSetu_AI/swasthyasetu-ai-env312/
+.neon
+
+# Backups & Temp Artifacts
+.mojibake_backup_*
+.claude-flow/
+qa/results/screens/
+qa/results/pw-artifacts/
+qa/results/load/*.csv
+qa/results/logs/
+qa/test-results/
+
+.github/

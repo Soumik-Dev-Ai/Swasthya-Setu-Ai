@@ -1,0 +1,25 @@
+# Doc 26 — autonomous source monitoring (daily change detector).
+# Fails the run (visibly, in GitHub's UI) if any watched source enters
+# needs_manual_confirmation or unreachable — so nothing rots silently.
+name: source-monitor
+
+on:
+  schedule:
+    - cron: "0 3 * * *" # daily 03:00 UTC
+  workflow_dispatch: {} # allow manual runs
+
+jobs:
+  check-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+      - name: Run the source change detector
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        working-directory: backend
+        run: python -m scripts.source_monitor_run

@@ -1,0 +1,62 @@
+# CI pipeline per docs/03_SYSTEM_ARCHITECTURE.md §15.
+# The safety-tests job is a HARD GATE: if the deterministic safety layer
+# adversarial suite fails, nothing else runs and nothing merges.
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  safety-tests:
+    name: Deterministic Safety Gate (merge blocker)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+      # This job MUST pass before anything else runs — a failing safety
+      # test blocks the entire pipeline (docs/01 audit findings #4, #18).
+      - name: Run the adversarial safety-layer suite
+        run: pytest backend/tests/test_safety_layer.py -v
+
+  backend-tests:
+    name: Backend suite
+    needs: safety-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+      - name: Compile check
+        run: python -m compileall backend/app -q
+      - name: Full backend test suite
+        run: pytest backend/tests/ -v
+      - name: Alembic migrations apply cleanly (SQLite)
+        run: |
+          cd backend
+          alembic -x db_url=sqlite:///./ci_migration_check.db upgrade head
+          rm -f ci_migration_check.db
+
+  frontend-build:
+    name: Frontend type-check + build
+    needs: safety-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install and lint
+        run: |
+          cd "frontend 2.0"
+          npm ci
+          npm run lint
+      - name: Production build
+        run: |
+          cd "frontend 2.0"
+          npm run build

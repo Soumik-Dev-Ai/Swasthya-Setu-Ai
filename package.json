@@ -1,0 +1,11 @@
+{
+  "name": "swasthasetu-ai",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm --prefix \"frontend 2.0\" run build"
+  },
+  "dependencies": {
+    "@neon/config": "^1.14.5",
+    "@neon/env": "^2.1.8"
+  }
+}
