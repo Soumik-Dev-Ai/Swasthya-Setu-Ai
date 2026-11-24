@@ -15,6 +15,7 @@ from types import SimpleNamespace
 import pytest
 
 from app.services import pricing_service, precision_service, v2_data
+from app.services.provider_registry import get_cascade
 from app.services.safety_layer import enforce_red_flag_safety
 from app.services.v2_engine import run_triage_v3
 
@@ -27,7 +28,7 @@ async def test_cascade_429_falls_through_gemini_groq_then_nvidia(monkeypatch):
 
     async def fake_acompletion(*, model, **_kwargs):
         calls.append(model)
-        if model.startswith("gemini/") or model.startswith("groq/"):
+        if model.startswith("gemini/") or model.startswith("nvidia_nim/"):
             raise RuntimeError("429 rate limit (simulated)")
         return SimpleNamespace(
             choices=[
@@ -58,11 +59,12 @@ async def test_cascade_429_falls_through_gemini_groq_then_nvidia(monkeypatch):
         location="Delhi",
     )
 
-    assert calls == [
-        "gemini/gemini-1.5-flash",
-        "groq/llama-3.1-70b-versatile",
-        "nvidia/llama-3.1-70b-instruct",
-    ]
+    # 5D: models are registry-served and dynamic — assert against exactly
+    # what the registry hands the cascade, never a hardcoded name list.
+    from app.services.provider_registry import get_cascade
+
+    expected = [m for _, m in get_cascade("text")]
+    assert calls == expected
     assert result.source == pricing_service.COMMUNITY_SOURCE
     assert result.amount_inr == 12345
     assert result.confidence == 61
@@ -70,7 +72,7 @@ async def test_cascade_429_falls_through_gemini_groq_then_nvidia(monkeypatch):
 
 @pytest.mark.asyncio
 async def test_scraper_timeout_is_strict_and_graceful(monkeypatch):
-    """Scraper timeout is bounded at the prescribed 3.5 seconds."""
+    """Scraper timeout is bounded at the prescribed 3.0 seconds (phase 1 item 1A)."""
 
     observed_timeout: list[float] = []
 
@@ -88,7 +90,7 @@ async def test_scraper_timeout_is_strict_and_graceful(monkeypatch):
 
     result = await precision_service.get_verified_sources("simulated timeout")
 
-    assert observed_timeout == [3.5]
+    assert observed_timeout == [3.0]
     assert result == []
 
 
@@ -237,7 +239,7 @@ async def test_cascade_one_second_timeout_falls_through_to_nvidia(monkeypatch):
         timeout=3.0,
     )
 
-    assert calls == ["gemini/gemini-1.5-flash", "nvidia/llama-3.1-70b-instruct"]
+    assert calls == [m for _, m in get_cascade("text") if m]
     assert result.source == pricing_service.COMMUNITY_SOURCE
     assert result.amount_inr == 24680
     assert result.confidence == 72
