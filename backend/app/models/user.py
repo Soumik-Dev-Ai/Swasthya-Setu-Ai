@@ -11,6 +11,7 @@ class Role:
     """String role constants (kept here to avoid a circular enum import with schemas)."""
     ASHA = "ASHA"
     ADMIN = "ADMIN"
+    PENDING_ASHA = "PENDING_ASHA"  # awaiting admin approval; cannot log in
 
 
 class User(Base):

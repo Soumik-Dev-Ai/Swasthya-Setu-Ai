@@ -1,9 +1,10 @@
 """V2 request/response Pydantic schemas."""
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 Severity = Literal["mild", "moderate", "severe", "critical"]
@@ -28,6 +29,10 @@ class TriageAnalyzeRequest(BaseModel):
     age: str | None = None
     gender: str | None = None
     flags: list[str] = Field(default_factory=list)
+    # Phase 3: opt-in grounded text reasoning. Default off — the safety gate
+    # and deterministic engine always run first; this only adds a grounded
+    # refinement for non-red-flag inputs when the caller requests it.
+    reasoning: bool = False
 
 
 # ---------- 2. triage/emergency-route
@@ -86,10 +91,20 @@ class FacilitiesSearchFilters(BaseModel):
 
 
 class FacilitiesSearchRequest(BaseModel):
-    cityId: SafeId
+    cityId: SafeId | None = None
+    latitude: float | None = None
+    longitude: float | None = None
     filters: FacilitiesSearchFilters = Field(default_factory=FacilitiesSearchFilters)
     query: str = ""
     sort: Literal["near", "cost", "quality"] = "near"
+
+    @model_validator(mode="after")
+    def validate_search_target(self) -> FacilitiesSearchRequest:
+        if not self.cityId and self.latitude is None and not self.query:
+            raise ValueError("Must provide either cityId, coordinates, or query")
+        if not self.cityId:
+            self.cityId = "delhi"
+        return self
 
 
 # ---------- Generic response models (for docs; router returns dicts too)
@@ -111,6 +126,9 @@ class TriageResultOut(BaseModel):
     safety_audit: SafetyAuditOut = Field(default_factory=lambda: SafetyAuditOut(
         vision_escalated=False, vision_downgrade_blocked=False, triggered_keywords=[]
     ))
+    # Phase 3: grounded text reasoning (opt-in; never overrides the gate).
+    reasoning: dict[str, Any] | None = None
+    grounding_reference: str | None = None
 
 
 class CostEstimateOut(BaseModel):
@@ -120,6 +138,9 @@ class CostEstimateOut(BaseModel):
     monthly: int
     verified_sources: list[dict[str, Any]] = Field(default_factory=list)
     disclaimer: str = ""
+    # Freshness label, always present: ISO date from a verified government
+    # row, or "curated static dataset" when only the bundled data covers it.
+    as_of: str | None = None
 
 
 class GapItem(BaseModel):
@@ -146,6 +167,9 @@ class SchemeMatchOut(BaseModel):
 class FacilityHitOut(BaseModel):
     hospital: dict[str, Any]
     km: int
+    last_verified_date: datetime | None = None
+    # doc 25 §3 — static Google Maps directions link (no API key, no billing).
+    directions_url: str | None = None
 
 
 # ---------- V3 deep integration: advanced-search ----------
@@ -163,6 +187,9 @@ class FacilityAdvancedOut(BaseModel):
     km: int
     price: PriceEstimateOut | None
     source: str  # "verified_official_data" | "community_estimate_unverified" | "no_estimate_available"
+    last_verified_date: datetime | None = None
+    # doc 25 §3 — static Google Maps directions link (no API key, no billing).
+    directions_url: str | None = None
 
 
 # ---------- V3 deep integration: vision-augmented triage ----------
@@ -173,6 +200,12 @@ class VisionSignalOut(BaseModel):
     confidence: int
     model_version: str
     source: str
+    # Phase 1 item 1C: the vision cascade computes these grounding fields but
+    # the response model silently dropped them — the frontend could never
+    # see whether a citation was verified.
+    grounding_reference: str | None = None
+    grounding_verified: bool = False
+    reason: str = ""
 
 
 class SafetyAuditOut(BaseModel):
@@ -193,6 +226,8 @@ class EmergencyCaseOut(BaseModel):
     level: Literal[4]
     assessedAt: int
     status: Literal["pending", "accepted"]
+    # True => fixture/demo row, never a real patient record (phase-0 N2).
+    synthetic: bool = True
 
 
 class EmergencyHitOut(BaseModel):

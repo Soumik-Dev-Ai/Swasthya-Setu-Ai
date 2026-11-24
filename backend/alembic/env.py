@@ -13,15 +13,33 @@ from app.db.database import Base
 # Import all models so they are registered on Base.metadata before autogenerate runs.
 from app.models import (  # noqa: F401
     AshaRecord,
+    AshaWorkerProfile,
+    DocumentRegistry,
     Facility,
+    FacilityCapacitySnapshot,
+    FollowUpWorklist,
+    GovernmentCost,
+    KnowledgeChunk,
+    PatientEvent,
+    PatientRecord,
     Pricing,
+    Referral,
+    SafetyOverrideLog,
     Scheme,
     TriageSession,
     User,
+    WatchedSource,
 )
 
 config = context.config
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+
+# URL precedence: explicit `-x db_url=...` argument (used by tests and
+# one-off ops) beats the app settings default.
+_x_args = context.get_x_argument(as_dictionary=True)
+if "db_url" in _x_args:
+    config.set_main_option("sqlalchemy.url", _x_args["db_url"])
+else:
+    config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
