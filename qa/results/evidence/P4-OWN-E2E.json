@@ -1,0 +1,12 @@
+{
+  "id": "P4-OWN-E2E",
+  "claim": "Project's e2e_verify.py passes",
+  "status": "PASS",
+  "evidence": {
+    "cmd": "python ../backend/scripts/e2e_verify.py",
+    "rc": 0,
+    "tail": "PASS  F1 text triage (red flag)\n       status=200 level=4 emergency=True keywords=['chest pain', '\\\\b(crushing\\\\s+chest\\\\s+pain|chest\\\\s+pain)\\\\b']\nPASS  F1b text triage + reasoning flag\n       status=200 has_reasoning=True level=3\nPASS  F2 image triage (multipart)\n       status=200 level=3 vision=uncertain\nPASS  F3 cost alternatives (PM-JAY)\n       status=200 hospitals=2 first_total=7392\nPASS  F4 ASHA register->activate->login\n       register=201 pending_login=403 activate=200 role=ASHA final_login=200\nPASS  F5 referral create->idempotent->update\n       created=8c85c258-1726-4671-8ffa-617af23cde18 idempotent_same_id=True updated_status=in_transit\nPASS  F6 follow-up worklist->mark visited\n       scheduler_created=1 worklist_len=1 marked=200 resolved=True\nPASS  F7 token expiry->refresh rotation\n       expired_me=401 refresh=200 refreshed_me=200\nPASS  F8 hybrid fallbacks (facility SQL / gov cost / scheme merge)\n       facility_sql_fallback=True gov_cost_as_of=2026-02-10 pmjay_csc_null_url=True sql_scheme_merged=True\n\nEvidence written to C:\\Users\\user\\projects\\SwasthaSetu Ai\\docs\\E2E_VERIFICATION_EVIDENCE.md\n",
+    "caveat": "self-reported; compare with independent P2-P6 results"
+  },
+  "ts": "2026-11-23T16:50:18"
+}

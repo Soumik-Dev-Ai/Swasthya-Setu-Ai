@@ -1,0 +1,14 @@
+{
+  "id": "P5-OVERSIZE",
+  "claim": "Oversized payload is rejected gracefully (4xx) with no crash/unhandled page error",
+  "status": "PASS",
+  "evidence": {
+    "oversizeStatuses": [
+      422
+    ],
+    "pageErrors": [],
+    "all5xx": [],
+    "uiExcerpt": "AI Symptom Detector\n\nA 60-second check that tells you how urgent it is — and where to go.\n\n✓\nWho is unwell?\n✓\nWhat are the symptoms?\n3\nDanger signals\n\n1 validation error for TriageAnalyzeRequest sympt",
+    "note": "PARTIAL = accepted 200KB without rejecting; confirm a max length exists."
+  }
+}

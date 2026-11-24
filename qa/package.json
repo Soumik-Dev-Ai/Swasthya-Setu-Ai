@@ -1,0 +1,17 @@
+{
+  "name": "swasthyasetu-qa-harness",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test:p1": "playwright test tests/p1_recon.spec.ts",
+    "test:p2": "playwright test tests/p2_flow2.spec.ts",
+    "test:p3": "playwright test tests/p3_data_integrity.spec.ts",
+    "test:p4": "playwright test tests/p4_flows.spec.ts",
+    "test:p5": "playwright test tests/p5_adversarial.spec.ts",
+    "test:p6": "playwright test tests/p6_refresh_race.spec.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "^22.0.0"
+  }
+}

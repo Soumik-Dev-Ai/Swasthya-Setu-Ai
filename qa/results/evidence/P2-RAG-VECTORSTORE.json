@@ -1,0 +1,30 @@
+{
+  "id": "P2-RAG-VECTORSTORE",
+  "claim": "Knowledge base uses pgvector with an ANN index (locked decision, docs 14/22)",
+  "status": "PASS",
+  "evidence": {
+    "pgvector": true,
+    "embedding_columns": [
+      [
+        "knowledge_chunks",
+        "embedding",
+        "vector"
+      ],
+      [
+        "knowledge_chunks",
+        "embedding_json",
+        "text"
+      ]
+    ],
+    "ann_indexes": [
+      "CREATE INDEX ix_knowledge_chunks_embedding_hnsw ON public.knowledge_chunks USING hnsw (embedding vector_cosine_ops)"
+    ],
+    "engine": "postgres",
+    "embedding_env": {
+      "EMBEDDING_BACKEND": "",
+      "EMBEDDING_MODEL": ""
+    },
+    "note": "FAIL = in-process JSON vectors. Not a safety bug by itself (and Neon's free tier means cost was not a valid reason), but it departs from the locked architecture: decide deliberately and update the docs, or migrate."
+  },
+  "ts": "2026-11-23T14:27:35"
+}

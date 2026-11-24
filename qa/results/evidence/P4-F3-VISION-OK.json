@@ -1,0 +1,15 @@
+{
+  "id": "P4-F3-VISION-OK",
+  "claim": "Image + text triage renders a result",
+  "status": "PASS",
+  "evidence": {
+    "stuckSpinner": false,
+    "crashed": false,
+    "gracefulUncertainWording": true,
+    "calls": [
+      "POST /api/triage/analyze 200"
+    ],
+    "excerpt": "AI Symptom Detector\n\nA 60-second check that tells you how urgent it is — and where to go.\n\n✓\nWho is unwell?\n✓\nWhat are the symptoms?\n3\nDanger signals\nYour urgency level\nconfidence: 41%\nUrgent — hospital within hours\nMATCHED CONDITIONS\nPossible vector-borne febrile illness\nL3\nSkin rash / localized skin problem\nL1\nProlonged febrile illness with GI symptoms\nL3\nCLINICAL GUIDANCE\nUrgent · Push fluids aggressively. Daily platelet monitoring for the next 5 days; hospitalise if bleeding signs or dizzine",
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P4-F3-VISION-OK.png"
+  }
+}

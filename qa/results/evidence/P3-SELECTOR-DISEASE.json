@@ -1,0 +1,31 @@
+{
+  "id": "P3-SELECTOR-DISEASE",
+  "claim": "Disease/procedure list is served by the backend (autonomous-refresh architecture)",
+  "status": "PASS",
+  "evidence": {
+    "options": [
+      "Dengue fever",
+      "Typhoid fever",
+      "Pneumonia",
+      "Cataract surgery",
+      "Knee replacement",
+      "Heart bypass (CABG)",
+      "Delivery (normal)",
+      "Dialysis (monthly)",
+      "Stroke management",
+      "COVID-19 care",
+      "Mild · Outpatient",
+      "Moderate · Inpatient",
+      "Severe · ICU",
+      "Critical · Multi-organ"
+    ],
+    "optionCount": 14,
+    "foundInApiResponses": 14,
+    "apiCalls": [
+      "/api/meta/diseases",
+      "/api/meta/cities",
+      "/api/meta/diseases",
+      "/api/meta/cities"
+    ]
+  }
+}

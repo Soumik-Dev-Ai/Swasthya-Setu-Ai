@@ -1,0 +1,603 @@
+{
+  "/#/": {
+    "finalUrl": "http://127.0.0.1:5173/#/",
+    "title": "SwasthyaSetu — India's Healthcare Navigation Layer",
+    "inputs": [],
+    "buttons": [
+      {
+        "text": "Enter SwasthyaSetu →",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "EN",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "हि",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "বাং",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "తె",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "ار",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "म",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "த",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "ಕ",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "ગુ",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Enter SwasthyaSetu →",
+        "href": "",
+        "testid": ""
+      }
+    ],
+    "httpStatus": 200
+  },
+  "/#/app/admin": {
+    "finalUrl": "http://127.0.0.1:5173/#/app/admin",
+    "title": "Admin · SwasthyaSetu",
+    "inputs": [],
+    "buttons": [
+      {
+        "text": "Enter SwasthyaSetu →",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "EN",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "हि",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "বাং",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "తె",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "ار",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "म",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "த",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "ಕ",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "ગુ",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Enter SwasthyaSetu →",
+        "href": "",
+        "testid": ""
+      }
+    ],
+    "httpStatus": null
+  },
+  "/#/app/triage": {
+    "finalUrl": "http://127.0.0.1:5173/#/app/triage",
+    "title": "Symptom Triage · SwasthyaSetu",
+    "inputs": [],
+    "buttons": [
+      {
+        "text": "SwasthyaSetuAI",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Insurance",
+        "href": "#/app/insurance",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      },
+      {
+        "text": "EN",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "1\nWho is unwell?",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "2\nWhat are the symptoms?",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "3\nDanger signals",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Child (under 12)",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Adult (12–60)",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Senior (60+)",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Back",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Next",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      }
+    ],
+    "httpStatus": null
+  },
+  "/#/app/cost": {
+    "finalUrl": "http://127.0.0.1:5173/#/app/cost",
+    "title": "Cost & Finance · SwasthyaSetu",
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "",
+        "id": "",
+        "placeholder": "Search a treatment, e.g. “cataract”",
+        "label": "",
+        "testid": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "name": "",
+        "id": "",
+        "label": "Treatment",
+        "testid": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "",
+        "id": "",
+        "placeholder": "Treatment",
+        "label": "",
+        "testid": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "",
+        "id": "",
+        "placeholder": "Select city or state",
+        "label": "",
+        "testid": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "name": "",
+        "id": "",
+        "label": "",
+        "testid": ""
+      }
+    ],
+    "buttons": [
+      {
+        "text": "SwasthyaSetuAI",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Insurance",
+        "href": "#/app/insurance",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      },
+      {
+        "text": "EN",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Search",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      }
+    ],
+    "httpStatus": null
+  },
+  "/#/app/facilities": {
+    "finalUrl": "http://127.0.0.1:5173/#/app/facilities",
+    "title": "Facility Navigator · SwasthyaSetu",
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "",
+        "id": "",
+        "placeholder": "City or Village",
+        "label": "",
+        "testid": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "",
+        "id": "",
+        "placeholder": "Search by name…",
+        "label": "",
+        "testid": ""
+      }
+    ],
+    "buttons": [
+      {
+        "text": "SwasthyaSetuAI",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Insurance",
+        "href": "#/app/insurance",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      },
+      {
+        "text": "EN",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "PM-JAY",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "24×7 ER",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "ICU",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Blood bank",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "NABH",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Prices",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Route near me",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Nearest 24×7 ER",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "+",
+        "href": "#",
+        "testid": ""
+      },
+      {
+        "text": "−",
+        "href": "#",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      }
+    ],
+    "httpStatus": null
+  },
+  "/#/app/asha/portal": {
+    "finalUrl": "http://127.0.0.1:5173/#/app/asha/portal",
+    "title": "ASHA Portal · SwasthyaSetu",
+    "inputs": [],
+    "buttons": [
+      {
+        "text": "SwasthyaSetuAI",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Insurance",
+        "href": "#/app/insurance",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      },
+      {
+        "text": "EN",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Sign in →",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "Home",
+        "href": "#/app/home",
+        "testid": ""
+      },
+      {
+        "text": "Symptom Triage",
+        "href": "#/app/triage",
+        "testid": ""
+      },
+      {
+        "text": "Cost & Finance",
+        "href": "#/app/cost",
+        "testid": ""
+      },
+      {
+        "text": "Facilities",
+        "href": "#/app/facilities",
+        "testid": ""
+      },
+      {
+        "text": "ASHA",
+        "href": "#/app/asha",
+        "testid": ""
+      }
+    ],
+    "httpStatus": null
+  }
+}

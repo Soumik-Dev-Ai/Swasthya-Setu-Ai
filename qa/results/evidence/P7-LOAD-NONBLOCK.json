@@ -1,0 +1,18 @@
+{
+  "id": "P7-LOAD-NONBLOCK",
+  "claim": "Deterministic red-flag path stays fast under concurrent LLM-path load (not serialized behind it)",
+  "status": "PASS",
+  "evidence": {
+    "redflag_solo_p95_ms": 130.0,
+    "redflag_mixed_p95_ms": 580.0,
+    "ambiguous_mixed_p95_ms": 1600.0,
+    "redflag_mixed_failures": "0",
+    "redflag_mixed_requests": "8",
+    "thresholds": {
+      "absolute_ms": 1000.0,
+      "ratio_vs_solo": 5.0
+    },
+    "reading": "If red-flag p95 tracks the ambiguous p95 under load, the two paths are being serialized (blocking call in an async handler, shared worker pool, or single worker)."
+  },
+  "ts": "2026-11-23T17:22:58"
+}

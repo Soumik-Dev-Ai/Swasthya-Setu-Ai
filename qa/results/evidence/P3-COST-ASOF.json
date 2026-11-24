@@ -1,0 +1,21 @@
+{
+  "id": "P3-COST-ASOF",
+  "claim": "Cost response carries a freshness/as_of field",
+  "status": "PASS",
+  "evidence": {
+    "fieldsFound": [
+      {
+        "k": "as_of",
+        "v": "curated static dataset (v2_data)"
+      },
+      {
+        "k": "as_of",
+        "v": "curated static dataset (v2_data)"
+      }
+    ],
+    "responseKeys": [
+      "0",
+      "1"
+    ]
+  }
+}

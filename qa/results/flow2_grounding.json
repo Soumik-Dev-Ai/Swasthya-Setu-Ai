@@ -1,0 +1,18 @@
+{
+  "phrase": "fever for 4 days, dry cough, mild fatigue",
+  "grounding": [
+    {
+      "path": "/api/triage/analyze",
+      "key": "grounding_reference",
+      "value": "who_imci_chartbook/c0020"
+    },
+    {
+      "path": "/api/triage/analyze",
+      "key": "grounding_reference",
+      "value": "who_imci_chartbook/c0020"
+    }
+  ],
+  "sequence": [
+    "POST /api/triage/analyze -> 200 (3732ms)"
+  ]
+}

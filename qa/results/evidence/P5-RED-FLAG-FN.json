@@ -1,0 +1,36 @@
+{
+  "id": "P5-RED-FLAG-FN",
+  "claim": "Every true-emergency phrase (all languages/variants) yields L4 end-to-end in the UI; zero false negatives",
+  "status": "PASS",
+  "evidence": {
+    "casesRun": 28,
+    "emergencyCases": 22,
+    "falseNegatives": [],
+    "overTriageCount": 0,
+    "overTriage": [],
+    "manualReviewQueue": [
+      {
+        "id": "neg-1",
+        "text": "no chest pain and no breathing problem, just a mild cough",
+        "category": "negation",
+        "apiLevels": [
+          "4",
+          "4"
+        ],
+        "uiL4": true
+      },
+      {
+        "id": "neg-2",
+        "text": "ruled out heart attack and stroke, doctor diagnosed simple gas",
+        "category": "negation",
+        "apiLevels": [
+          "4",
+          "4"
+        ],
+        "uiL4": true
+      }
+    ],
+    "note": "Over-triage is tracked, not a safety failure. Items in manualReviewQueue need a human reading against doc 09/12 expectations.",
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P5-REDFLAG.png"
+  }
+}

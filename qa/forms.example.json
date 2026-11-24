@@ -1,0 +1,29 @@
+{
+  "_comment": "Copy to forms.json and correct from results/recon/ui_map.json. 'label' is a case-insensitive regex matched against the field's visible label/aria-label. {{run}}, {{mark}}, {{asha_user}}, {{asha_pass}} are substituted per run. {{mark}} MUST appear in a patient/referral name field so records can be found and de-duplicated.",
+  "register_asha": {
+    "route": "/register",
+    "fields": [
+      {"label": "user(name)?|email", "value": "{{asha_user}}"},
+      {"label": "^password", "value": "{{asha_pass}}"},
+      {"label": "role", "value": "asha", "kind": "select"}
+    ],
+    "submit": "register|sign up|create account"
+  },
+  "create_patient": {
+    "route": "/patients/new",
+    "fields": [
+      {"label": "name", "value": "{{mark}}"},
+      {"label": "age", "value": "34"},
+      {"label": "village|location", "value": "QA Village"}
+    ],
+    "submit": "save|add|create|register"
+  },
+  "create_referral": {
+    "route": "/referrals/new",
+    "fields": [
+      {"label": "patient|name", "value": "{{mark}}"},
+      {"label": "reason", "value": "QA referral"}
+    ],
+    "submit": "refer|create|submit"
+  }
+}

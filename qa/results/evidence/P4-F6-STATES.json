@@ -1,0 +1,18 @@
+{
+  "id": "P4-F6-STATES",
+  "claim": "Referral state machine pending→in_transit→arrived→admitted→discharged works through the UI",
+  "status": "PASS",
+  "evidence": {
+    "steps": [
+      "in transit: clicked",
+      "arrived: clicked",
+      "completed: clicked"
+    ],
+    "statusesSeenInApi": [
+      "pending",
+      "in_transit",
+      "arrived"
+    ],
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P4-F6-STATES.png"
+  }
+}

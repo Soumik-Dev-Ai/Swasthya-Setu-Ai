@@ -1,0 +1,11 @@
+{
+  "id": "P3-COST-LATENCY",
+  "claim": "Cost answer is a DB lookup (fast, no live compute)",
+  "status": "PASS",
+  "evidence": {
+    "path": "/api/cost/alternatives",
+    "ms": 1732,
+    "threshold_ms": 2500,
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P3-COST.png"
+  }
+}

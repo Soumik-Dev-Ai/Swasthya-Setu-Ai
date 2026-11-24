@@ -1,0 +1,18 @@
+{
+  "id": "P6-RATELIMIT-DEFAULT",
+  "claim": "Limiter returns 429 at request #201 within one minute for /health",
+  "status": "PASS",
+  "evidence": {
+    "path": "/health",
+    "documentedLimit": 200,
+    "first429AtRequest": 201,
+    "expected": 201,
+    "statusCounts": {
+      "200": 200,
+      "429": 39
+    },
+    "elapsedSec": 5.2,
+    "note": "No 429 at all = limiter not active on this path; off-by-N = limit differs from documentation (fixed vs sliding window can legitimately shift by a few)."
+  },
+  "ts": "2026-11-23T14:51:35"
+}

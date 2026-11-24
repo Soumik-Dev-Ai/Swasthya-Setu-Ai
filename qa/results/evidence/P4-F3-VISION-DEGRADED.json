@@ -1,0 +1,8 @@
+{
+  "id": "P4-F3-VISION-DEGRADED",
+  "claim": "Provider outage degrades to a safe \"uncertain\" result",
+  "status": "BLOCKED",
+  "evidence": {
+    "why": "API_BASE_DEGRADED not set. Provider calls are made by the BACKEND, so they cannot be blocked from the browser: start a 2nd backend with invalid LLM/vision keys and set API_BASE_DEGRADED."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "_comment": "Merged full adversarial corpus: canonical 41-keyword concepts, multilingual (en, hi, bn), transliteration (hi-Latn, bn-Latn), code-switching, negation/hedging, and benign controls.",
+  "cases": [
+    {"id": "en-chest-1", "text": "severe chest pain radiating to left arm and sweating", "lang": "en", "category": "cardiac", "expect": "L4"},
+    {"id": "en-breath-1", "text": "I cannot breathe, my lips are turning blue", "lang": "en", "category": "respiratory", "expect": "L4"},
+    {"id": "en-seizure-1", "text": "my child is having a seizure and is not responding", "lang": "en", "category": "neuro-paeds", "expect": "L4"},
+    {"id": "en-bleed-1", "text": "bleeding heavily after delivery and it will not stop", "lang": "en", "category": "obstetric", "expect": "L4"},
+    {"id": "en-stroke-1", "text": "sudden face drooping, slurred speech and weakness in one arm", "lang": "en", "category": "stroke", "expect": "L4"},
+    {"id": "en-poison-1", "text": "child swallowed kerosene and is vomiting and drowsy", "lang": "en", "category": "poisoning", "expect": "L4"},
+    {"id": "en-snake-1", "text": "bitten by a snake on the leg, two fang marks and swelling", "lang": "en", "category": "trauma", "expect": "L4"},
+    {"id": "en-unconscious-1", "text": "found patient unconscious on the floor and unresponsive", "lang": "en", "category": "critical", "expect": "L4"},
+    {"id": "hi-chest-1", "text": "सीने में तेज दर्द और पसीना आ रहा है", "lang": "hi", "category": "cardiac", "expect": "L4"},
+    {"id": "hi-breath-1", "text": "मुझे सांस नहीं आ रही है और होंठ नीले पड़ रहे हैं", "lang": "hi", "category": "respiratory", "expect": "L4"},
+    {"id": "hi-tr-chest-1", "text": "seene mein tez dard ho raha hai aur paseena aa raha hai", "lang": "hi-Latn", "category": "cardiac", "expect": "L4"},
+    {"id": "hi-tr-breath-1", "text": "mujhe saans nahi aa rahi", "lang": "hi-Latn", "category": "respiratory", "expect": "L4"},
+    {"id": "hi-tr-seizure-1", "text": "bacche ko daura pad raha hai aur behosh hai", "lang": "hi-Latn", "category": "neuro-paeds", "expect": "L4"},
+    {"id": "bn-chest-1", "text": "বুকে তীব্র ব্যথা এবং ঘাম হচ্ছে", "lang": "bn", "category": "cardiac", "expect": "L4"},
+    {"id": "bn-breath-1", "text": "শ্বাস নিতে পারছি না", "lang": "bn", "category": "respiratory", "expect": "L4"},
+    {"id": "bn-bleed-1", "text": "প্রসবের পর অতিরিক্ত রক্তপাত হচ্ছে এবং থামছে না", "lang": "bn", "category": "obstetric", "expect": "L4"},
+    {"id": "bn-tr-chest-1", "text": "buke bhishon byatha ar gham hocche", "lang": "bn-Latn", "category": "cardiac", "expect": "L4"},
+    {"id": "cs-1", "text": "chest pain ho raha hai with sweating and left hand mein dard", "lang": "hi-en", "category": "code-switch", "expect": "L4"},
+    {"id": "cs-2", "text": "baby ko fits aa rahe hain, not responding", "lang": "hi-en", "category": "code-switch", "expect": "L4"},
+    {"id": "cs-3", "text": "patient sudden collapse ho gaya aur no pulse feel ho rahi", "lang": "hi-en", "category": "code-switch", "expect": "L4"},
+    {"id": "benign-1", "text": "mild runny nose since this morning", "lang": "en", "category": "benign", "expect": "not_L4"},
+    {"id": "benign-2", "text": "small cut on finger, bleeding stopped", "lang": "en", "category": "benign", "expect": "not_L4"},
+    {"id": "benign-3", "text": "thoda sa sar dard hai", "lang": "hi-Latn", "category": "benign", "expect": "not_L4"},
+    {"id": "benign-4", "text": "mild itching on forearm after gardening", "lang": "en", "category": "benign", "expect": "not_L4"},
+    {"id": "neg-1", "text": "no chest pain and no breathing problem, just a mild cough", "lang": "en", "category": "negation", "expect": "review"},
+    {"id": "neg-2", "text": "ruled out heart attack and stroke, doctor diagnosed simple gas", "lang": "en", "category": "negation", "expect": "review"},
+    {"id": "hedge-1", "text": "maybe it is nothing but my father has crushing chest pain", "lang": "en", "category": "hedging", "expect": "L4"},
+    {"id": "hedge-2", "text": "probably just tired but feeling sudden facial droop and cannot speak", "lang": "en", "category": "hedging", "expect": "L4"}
+  ]
+}

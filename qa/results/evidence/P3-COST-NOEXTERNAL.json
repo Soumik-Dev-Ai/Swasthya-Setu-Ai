@@ -1,0 +1,13 @@
+{
+  "id": "P3-COST-NOEXTERNAL",
+  "claim": "No external/third-party request at query time on the cost page",
+  "status": "PASS",
+  "evidence": {
+    "externalHosts": [
+      "fonts.googleapis.com",
+      "api.fontshare.com",
+      "cdn.fontshare.com"
+    ],
+    "unexpected": []
+  }
+}

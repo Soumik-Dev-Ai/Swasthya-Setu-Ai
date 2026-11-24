@@ -1,0 +1,21 @@
+{
+  "id": "P5-XSS",
+  "claim": "XSS payloads in symptom text are escaped, never executed",
+  "status": "PASS",
+  "evidence": {
+    "payloads": [
+      "<img src=x onerror=\"window.__xss=1\">",
+      "<script>window.__xss=1</script>",
+      "\"><svg onload=window.__xss=1>",
+      "javascript:window.__xss=1"
+    ],
+    "scriptExecuted": false,
+    "dialogsOpened": 0,
+    "apiStatuses": [
+      200,
+      200,
+      200,
+      200
+    ]
+  }
+}

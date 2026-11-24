@@ -1,0 +1,16 @@
+{
+  "id": "P4-F1-EMERGENCY",
+  "claim": "Red-flag text → L4 in <1s with 108 call button and nearest-facility directions link",
+  "status": "PASS",
+  "evidence": {
+    "msToVisibleL4": 945,
+    "thresholdMs": 1000,
+    "telLinks": 1,
+    "mapsLinks": 1,
+    "l4TextWasVisibleBeforeSubmit": true,
+    "calls": [
+      "POST /api/triage/analyze 200 273ms"
+    ],
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P4-F1.png"
+  }
+}

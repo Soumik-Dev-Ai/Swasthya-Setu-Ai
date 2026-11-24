@@ -1,0 +1,11 @@
+{
+  "id": "P4-F5-ADMIN-APPROVE",
+  "claim": "Admin can approve the pending ASHA (API shortcut)",
+  "status": "PASS",
+  "evidence": {
+    "adminLoggedIn": true,
+    "userFound": true,
+    "path": "/api/admin/users/23/activate",
+    "status": 200
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "P2-FLOW2-ENDPOINTS",
+  "status": "PASS",
+  "claim": "Text triage runs through the Reasoning Engine and returns a grounded result (resolves integration-report vs blueprint contradiction)",
+  "evidence": {
+    "verdict": "Consolidated gateway: /triage/analyze alone carried the reasoning (blueprint design). Reasoning/analyze endpoint called and a non-empty grounding_reference returned. Chunk existence is verified by scripts/verify_grounding.py.",
+    "sequence": [
+      "POST /api/triage/analyze -> 200 (3732ms)"
+    ],
+    "calledIntent": 0,
+    "calledReason": 0,
+    "calledAnalyze": 1,
+    "groundingCount": 2,
+    "analyzeRequestBody": "{\"symptoms\":\"fever for 4 days, dry cough, mild fatigue. Fever\",\"flags\":[],\"reasoning\":true,\"age\":\"adult\"}",
+    "providerFields": [],
+    "abstained": false,
+    "renderedTextExcerpt": "AI Symptom Detector\n\nA 60-second check that tells you how urgent it is — and where to go.\n\n✓\nWho is unwell?\n✓\nWhat are the symptoms?\n3\nDanger signals\nYour urgency level\nconfidence: 82%\nUrgent — hospital within hours\nMATCHED CONDITIONS\nAcute respiratory / viral illness\nL2\nPossible vector-borne febrile illness\nL3\nProlonged febrile illness with GI symptoms\nL3\nCLINICAL GUIDANCE\nPrompt · Test on day 2-3 of fever. Isolate and monitor oxygen saturation with a pulse oximeter twice daily.\nUrgent · Push fluids aggressively. Daily platelet monitoring for the next 5 days; hospitalise if bleeding signs or ",
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P2-FLOW2.png"
+  }
+}

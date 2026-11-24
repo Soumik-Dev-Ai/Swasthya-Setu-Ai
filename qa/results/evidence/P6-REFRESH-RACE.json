@@ -1,0 +1,13 @@
+{
+  "id": "P6-REFRESH-RACE",
+  "claim": "Concurrent expired-token requests trigger exactly one /auth/refresh (no refresh stampede)",
+  "status": "PASS",
+  "evidence": {
+    "exactRefreshCalls": 1,
+    "expected": 1,
+    "requestsRejectedWith401": 4,
+    "forcedToLoginPage": false,
+    "why": "",
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P6-REFRESH-RACE.png"
+  }
+}

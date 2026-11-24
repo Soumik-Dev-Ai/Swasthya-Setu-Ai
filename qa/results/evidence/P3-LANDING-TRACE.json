@@ -1,0 +1,17 @@
+{
+  "id": "P3-LANDING-TRACE",
+  "claim": "Landing-page statistics come from backend data, not frontend mock data",
+  "status": "PASS",
+  "evidence": {
+    "visibleNumbers": [
+      "2022"
+    ],
+    "untraced": [],
+    "apiCallsMade": [
+      "/api/meta/cities",
+      "/api/meta/cities"
+    ],
+    "how_to_clear": "Each untraced number is either fabricated (fix: wire to API) or incidental (e.g. \"24/7\"): add to corpus/incidental_numbers.json WITH a reason.",
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P3-LANDING.png"
+  }
+}

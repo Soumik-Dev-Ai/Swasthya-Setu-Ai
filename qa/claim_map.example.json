@@ -1,0 +1,10 @@
+{
+  "_comment": "Copy to claim_map.json. Read the blueprint's 30 audit points / 8 E2E suites and list EVERY one as an entry. 'checks' = ids from results (see REPORT.md). A claim with no mapped check can never be 'confirmed'.",
+  "points": [
+    {"n": 1, "claim": "Text triage routes through intent + Reasoning Engine with grounded result", "checks": ["P2-FLOW2-ENDPOINTS", "P2-FLOW2-GROUNDING-REAL"]},
+    {"n": 2, "claim": "Red-flag safety gate returns L4 for all emergency phrases", "checks": ["P4-F1-EMERGENCY", "P5-RED-FLAG-FN"]},
+    {"n": 3, "claim": "Cost data is served from the verified DB with freshness label", "checks": ["P3-COST-LATENCY", "P3-COST-ASOF", "P3-COST-NOEXTERNAL"]},
+    {"n": 4, "claim": "Bed capacity is labelled with a snapshot date, never implied live", "checks": ["P3-BED-STALENESS"]},
+    {"n": 5, "claim": "Refresh-token handling is single-flight under concurrency", "checks": ["P6-REFRESH-RACE"]}
+  ]
+}

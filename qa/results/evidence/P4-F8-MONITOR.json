@@ -1,0 +1,28 @@
+{
+  "id": "P4-F8-MONITOR",
+  "claim": "Source monitor routes ambiguous changes to needs_manual_confirmation and never silently publishes",
+  "status": "PARTIAL",
+  "evidence": {
+    "triggerRc": 0,
+    "triggerTail": "checked: {'checked': 0, 'changed': 0, 'unreachable': 0, 'dispatched': 0}\n",
+    "columns": [
+      "id",
+      "source_url",
+      "source_type",
+      "last_checked_at",
+      "last_content_hash",
+      "check_frequency",
+      "last_change_at",
+      "status",
+      "extra"
+    ],
+    "statusColumn": "status",
+    "rowsChanged": 0,
+    "statesAfterTrigger": [],
+    "publishedTable": "government_costs",
+    "publishedTableChanged": false,
+    "needsManualConfirmationRows": 0,
+    "required_to_upgrade_to_PASS": "Seed ONE ambiguous fixture in the QA DB (two same-day documents with contradictory supersession, served from a local http server and registered as a watched_source), rerun, and assert: that row == needs_manual_confirmation AND published table checksum unchanged."
+  },
+  "ts": "2026-11-23T14:42:19"
+}

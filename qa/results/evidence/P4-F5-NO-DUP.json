@@ -1,0 +1,8 @@
+{
+  "id": "P4-F5-NO-DUP",
+  "claim": "Sync after reconnect creates no duplicate record",
+  "status": "PASS",
+  "evidence": {
+    "recordsWithMarker": 1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "P3-SELECTOR-CITY",
+  "claim": "City list is served by the backend (any-city expansion)",
+  "status": "PASS",
+  "evidence": {
+    "options": [
+      "Delhi",
+      "Mumbai",
+      "Kolkata",
+      "Bhopal",
+      "Ranchi",
+      "Patna",
+      "Jaipur",
+      "New Delhi",
+      "Rampur",
+      "Ratlam"
+    ],
+    "optionCount": 10,
+    "foundInApiResponses": 10,
+    "apiCalls": [
+      "/api/meta/cities",
+      "/api/meta/diseases",
+      "/api/meta/cities",
+      "/api/meta/diseases",
+      "/api/facilities/search"
+    ]
+  }
+}

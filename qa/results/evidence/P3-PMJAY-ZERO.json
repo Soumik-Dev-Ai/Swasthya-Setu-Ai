@@ -1,0 +1,9 @@
+{
+  "id": "P3-PMJAY-ZERO",
+  "claim": "PM-JAY eligible in-database procedure shows ₹0 patient cost",
+  "status": "PARTIAL",
+  "evidence": {
+    "note": "First-pass: cost page default selection inspected only. Agent must repeat with a PM-JAY-eligible selection (forms.json) and assert value 0.",
+    "oopFields": []
+  }
+}

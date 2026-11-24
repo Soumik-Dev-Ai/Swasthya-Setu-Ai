@@ -1,0 +1,12 @@
+{
+  "id": "P4-OWN-UNIT",
+  "claim": "Project's backend test suite passes",
+  "status": "PASS",
+  "evidence": {
+    "cmd": "python -m pytest ../backend/tests -q",
+    "rc": 0,
+    "tail": "_TOO_LARGE' is deprecated. Use 'HTTP_413_CONTENT_TOO_LARGE' instead.\n    from app.main import app  # noqa: E402\n\n..\\backend\\tests\\conftest.py:36\n  C:\\Users\\user\\projects\\SwasthaSetu Ai\\backend\\tests\\conftest.py:36: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.\n    from app.main import app  # noqa: E402\n\nbackend/tests/test_adversarial_live.py::test_payload_poisoning_returns_422_not_500\nbackend/tests/test_adversarial_live.py::test_payload_poisoning_returns_422_not_500\nbackend/tests/test_adversarial_live.py::test_sql_like_identifier_strings_return_422\nbackend/tests/test_phase2_intent_care.py::test_error_envelope_on_validation_failure\nbackend/tests/test_phase5_security.py::test_sql_injection_sweep_never_yields_500\n  C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\_exception_handler.py:59: StarletteDeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.\n    response = await handler(conn, exc)  # type: ignore[arg-type]\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n220 passed, 7 warnings in 35.38s\n",
+    "caveat": "self-reported; compare with independent P2-P6 results"
+  },
+  "ts": "2026-11-23T16:51:01"
+}

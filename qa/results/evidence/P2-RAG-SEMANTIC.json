@@ -1,0 +1,27 @@
+{
+  "id": "P2-RAG-SEMANTIC",
+  "claim": "Retrieval grounds paraphrased symptoms that share no keywords with the guidelines",
+  "status": "PASS",
+  "evidence": {
+    "groundedOf": "3/3",
+    "results": [
+      {
+        "q": "my little one has been burning up for several days and keeps hacking without bringing anything up",
+        "status": 200,
+        "grounded": true
+      },
+      {
+        "q": "stomach keeps emptying out as watery stuff since the morning and he is weak",
+        "status": 200,
+        "grounded": true
+      },
+      {
+        "q": "her skin and the whites of her eyes have turned yellow this week",
+        "status": 200,
+        "grounded": true
+      }
+    ],
+    "caveat": "3 probes is a smoke test. Extend with a labelled paraphrase set before claiming retrieval quality; abstention on a truly absent topic is correct, so check results by hand."
+  },
+  "ts": "2026-11-23T14:27:37"
+}

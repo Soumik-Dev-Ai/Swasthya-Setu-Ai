@@ -1,0 +1,33 @@
+{
+  "id": "P5-SQLI",
+  "claim": "SQLi-shaped strings are handled without server errors",
+  "status": "PASS",
+  "evidence": {
+    "results": [
+      {
+        "input": "'; DROP TABLE users;--",
+        "statuses": [
+          200
+        ]
+      },
+      {
+        "input": "' OR '1'='1",
+        "statuses": [
+          200
+        ]
+      },
+      {
+        "input": "1; SELECT pg_sleep(5)--",
+        "statuses": [
+          200
+        ]
+      },
+      {
+        "input": "\\u0000 null byte \u0000",
+        "statuses": [
+          200
+        ]
+      }
+    ]
+  }
+}

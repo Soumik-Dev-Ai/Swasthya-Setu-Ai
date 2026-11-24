@@ -1,0 +1,9 @@
+{
+  "id": "P7-COLDSTART",
+  "claim": "First request after a cold start completes in < 3.0s",
+  "status": "BLOCKED",
+  "evidence": {
+    "why": "BACKEND_START_CMD not set (e.g. 'cd ../backend && uvicorn app.main:app --port 8000'). If testing Render free tier, set COLD_START_URL_ONLY=1 and wake it manually instead."
+  },
+  "ts": "2026-11-23T14:52:47"
+}

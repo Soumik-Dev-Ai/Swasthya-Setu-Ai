@@ -1,0 +1,7 @@
+{
+  "_comment": "Numbers visible on the landing page that are NOT statistics (e.g. '24/7', hotline numbers, years). Key = the number as it appears with commas stripped; value = the reason. Do not add a real statistic here: wire it to the API instead.",
+  "108": "national emergency ambulance number, not a statistic",
+  "2022": "NLEM revision year referenced in essential medicines count",
+  "2026": "year in hackathon name",
+  "384": "Static documented fact on the landing page (NLEM 2022 essential medicines). Not backend data: verify it against the NLEM source, do not treat it as traced."
+}

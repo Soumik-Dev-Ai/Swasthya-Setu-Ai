@@ -1,0 +1,32 @@
+{
+  "id": "P2-FLOW2-GROUNDING-REAL",
+  "claim": "grounding_reference returned by triage traces to a real chunk in the knowledge base",
+  "status": "PASS",
+  "evidence": {
+    "references": [
+      "who_imci_chartbook/c0020",
+      "who_imci_chartbook/c0020"
+    ],
+    "foundIn": {
+      "who_imci_chartbook/c0020": [
+        "knowledge_chunks.chunk_id",
+        "knowledge_chunks.chunk_id"
+      ]
+    },
+    "notFound": [],
+    "columnsSearched": [
+      "document_registry.corpus",
+      "document_registry.file_hash",
+      "document_registry.filename",
+      "document_registry.path",
+      "knowledge_chunks.chunk_id",
+      "knowledge_chunks.corpus",
+      "knowledge_chunks.embedding_json",
+      "knowledge_chunks.section_path",
+      "knowledge_chunks.source_name",
+      "knowledge_chunks.text"
+    ],
+    "note": "If columns searched is empty or the ref format is an ID, point this script at the actual chunk table/key column."
+  },
+  "ts": "2026-11-23T14:27:33"
+}

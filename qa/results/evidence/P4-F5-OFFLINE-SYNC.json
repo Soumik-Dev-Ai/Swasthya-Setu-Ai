@@ -1,0 +1,13 @@
+{
+  "id": "P4-F5-OFFLINE-SYNC",
+  "claim": "Records created in true offline mode queue locally and sync exactly once on reconnect",
+  "status": "PASS",
+  "evidence": {
+    "offlineQueuedIndicatorVisible": true,
+    "indexedDbs": [],
+    "syncPostObserved": true,
+    "recordsWithMarker": 1,
+    "expected": 1,
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P4-F5-offline.png"
+  }
+}

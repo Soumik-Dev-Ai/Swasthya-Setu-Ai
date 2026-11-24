@@ -1,0 +1,12 @@
+{
+  "id": "P4-F5-PENDING-LOGIN",
+  "claim": "Newly registered ASHA cannot log in until an admin approves",
+  "status": "PASS",
+  "evidence": {
+    "apiLoginStatusBeforeApproval": 403,
+    "uiLoggedIn": false,
+    "pendingMessageShown": true,
+    "excerpt": "Admin Console\n\nSign in with the account your district admin issued.\n\nSign in →\nASHA / Admin sign in\nUSERNAME\nPASSWORD\n\nYour registration is pending approval by your local health center. Please wait for activation.\n\nSign in →",
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P4-F5-PENDING-LOGIN.png"
+  }
+}

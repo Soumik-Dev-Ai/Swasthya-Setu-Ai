@@ -1,0 +1,10 @@
+{
+  "executed": 36,
+  "PASS": 31,
+  "BLOCKED": 2,
+  "PARTIAL": 3,
+  "blueprint_total": 30,
+  "confirmed": 25,
+  "contradicted": 0,
+  "not_confirmed": 5
+}

@@ -1,0 +1,12 @@
+{
+  "id": "P3-BED-STALENESS",
+  "claim": "Bed/ICU capacity is never implied as live; a staleness label is visible on screen",
+  "status": "PASS",
+  "evidence": {
+    "hasBedText": true,
+    "visibleAsOfLabel": true,
+    "misleadingLiveWording": false,
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P3-BED.png",
+    "apiHadTimestampField": false
+  }
+}

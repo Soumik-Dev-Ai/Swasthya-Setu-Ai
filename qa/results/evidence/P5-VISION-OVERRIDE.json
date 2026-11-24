@@ -1,0 +1,12 @@
+{
+  "id": "P5-VISION-OVERRIDE",
+  "claim": "Red-flag text cannot be downgraded by a benign vision result; override indicator shown",
+  "status": "PARTIAL",
+  "evidence": {
+    "stayedL4": true,
+    "apiOverrideFlag": [],
+    "uiIndicatorVisible": false,
+    "screenshot": "C:\\Users\\user\\projects\\SwasthaSetu Ai\\qa\\results\\screens\\P5-VISION-OVERRIDE.png",
+    "note": "PARTIAL means L4 held but the downgrade path was not demonstrably exercised: stub the vision provider to return non_serious (e.g. env on the QA backend) and re-run."
+  }
+}
