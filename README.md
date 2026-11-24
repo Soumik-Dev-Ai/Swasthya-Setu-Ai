@@ -1,4 +1,4 @@
-# SwasthyaSetu AI (स्वास्थ्यसेतु)
+# SwasthyaSetu AI
 ### Multilingual Clinical Triage, Financial Navigation & Resilient Healthcare Operations for Rural India
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
